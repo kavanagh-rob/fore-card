@@ -6,8 +6,8 @@ import {environment} from '../environments/environment';
 export class GolfDataService {
   constructor(private http: HttpClient) {}
 
-  extractData(res: Response) {
-    let body = res.data.Items[0].par;
+  extractData(res: any) {
+    const body = res.data.Items[0].par;
     console.log(body);
     return body || {};
   }

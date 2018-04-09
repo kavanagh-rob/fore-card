@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { GolfDataService } from './golf-data.service';
-import {scope} from 'aws-sdk/clients/ec2';
+
 
 @Component({
   selector: 'app-root',
@@ -8,10 +8,14 @@ import {scope} from 'aws-sdk/clients/ec2';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor( private golfDataService: GolfDataService) {}
+  constructor( private golfDataService: GolfDataService) {
+    this.loadData();
+  }
   title = 'Golf Scores';
   course = '';
-  load =  this.golfDataService.getGolfCourse().then( res => { // Success
+  loadData() {
+    this.golfDataService.getGolfCourse().then(res => { // Success
       this.course = res;
     });
+  }
 }
