@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GolfDataService } from './golf-data.service';
+import { GolfDataService } from './golf/shared/services/golf-data.service';
 
 
 @Component({

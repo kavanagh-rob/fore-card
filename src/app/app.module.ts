@@ -2,18 +2,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { GolfDataService } from './golf-data.service';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { GolfDataService } from './golf/shared/services/golf-data.service';
+import { LeaderboardComponent } from './golf/leaderboard/leaderboard.component';
+import { PageNotFoundComponent } from './golf/page-not-found/page-not-found.component';
+import { AddGolferComponent } from './add-golfer/add-golfer.component';
+import { GolferFormComponent } from './golf/golfer-form/golfer-form.component';
+import {FormsModule} from '@angular/forms';
 
 
 const appRoutes: Routes = [
   {
     path: 'leaderboard',
     component: LeaderboardComponent
+  },
+  {
+    path: 'addGolfer',
+    component: GolferFormComponent
   },
   // { path: 'hero/:id',      component: HeroDetailComponent },
   // {
@@ -34,7 +40,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LeaderboardComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AddGolferComponent,
+    GolferFormComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -42,7 +50,8 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [GolfDataService],
   bootstrap: [AppComponent]
