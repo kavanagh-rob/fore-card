@@ -7,9 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { GolfDataService } from './golf/shared/services/golf-data.service';
 import { LeaderboardComponent } from './golf/leaderboard/leaderboard.component';
 import { PageNotFoundComponent } from './golf/page-not-found/page-not-found.component';
-import { AddGolferComponent } from './add-golfer/add-golfer.component';
+import { AddGolferComponent } from './golf/add-golfer/add-golfer.component';
 import { GolferFormComponent } from './golf/golfer-form/golfer-form.component';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormsModule, NgControl} from '@angular/forms';
+import { CourseFormComponent } from './golf/course-form/course-form.component';
 
 
 const appRoutes: Routes = [
@@ -20,6 +21,10 @@ const appRoutes: Routes = [
   {
     path: 'addGolfer',
     component: GolferFormComponent
+  },
+  {
+    path: 'addCourse',
+    component: CourseFormComponent
   },
   // { path: 'hero/:id',      component: HeroDetailComponent },
   // {
@@ -42,7 +47,8 @@ const appRoutes: Routes = [
     LeaderboardComponent,
     PageNotFoundComponent,
     AddGolferComponent,
-    GolferFormComponent
+    GolferFormComponent,
+    CourseFormComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -53,6 +59,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule
   ],
+
   providers: [GolfDataService],
   bootstrap: [AppComponent]
 })

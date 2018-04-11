@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>Course Info</h1>
+  <form (ngSubmit)="onSubmit()" #courseForm="ngForm">
+    {{diagnostic}}
+    <div class="form-group col-xs-12">
+      <label for="name">Course Name</label>
+      <input type="text" class="form-control" [(ngModel)]="model.name" name="name" #name="ngModel" id="name" required>
+      <div [hidden]="name.valid || name.pristine"
+           class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+    
+    <div  *ngFor="let hole of model.holes; let i = index">
+      <div >
+        <div class="form-group col-xs-6">
+          <label for="par-{i}}">Hole {{i+1}} Par</label>
+          <select  type="number" class="form-control" [(ngModel)]="model.holes[i].par" id="par-{i}}" name="par-{i}}" required>
+              <option *ngFor="let par of parOptions" [value]="par">{{par}}</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="index-{{i}}">Hole {{i+1}} Index</label>
+          <select  type="number" class="form-control" [(ngModel)]="model.holes[i].index" id="index-{{i}}" name="index-{{i}}" required>
+            <option *ngFor="let index of indexOptions" [value]="index">{{index}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div [hidden]="indexFormValid"
+         class="alert alert-danger">
+      All Indexes must be populated and no two can match
+    </div>
+
+    <div [hidden]="parFormValid"
+         class="alert alert-danger">
+      All Pars must be populated
+    </div>
+
+
+    <button type="submit" class="btn btn-success">Submit Course</button>
+  </form>
+
+</div>

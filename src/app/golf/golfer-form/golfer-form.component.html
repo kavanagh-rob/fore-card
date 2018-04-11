@@ -1,7 +1,6 @@
 <div class="container">
   <h1>Golfer Info</h1>
   <form (ngSubmit)="onSubmit()" #golferForm="ngForm">
-    {{diagnostic}}
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" [(ngModel)]="model.name" name="name" #name="ngModel" id="name" required>
