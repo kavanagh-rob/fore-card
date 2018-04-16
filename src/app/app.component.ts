@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { GolfDataService } from './golf/shared/services/golf-data.service';
-
 
 @Component({
   selector: 'app-root',
@@ -8,14 +6,8 @@ import { GolfDataService } from './golf/shared/services/golf-data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor( private golfDataService: GolfDataService) {
-    this.loadData();
-  }
-  title = 'Golf Scores';
+  constructor( ) {}
+  title = 'Live Golf';
   course = '';
-  loadData() {
-    this.golfDataService.getGolfCourse().then(res => { // Success
-      this.course = res;
-    });
-  }
+
 }

@@ -12,7 +12,7 @@ export class LeaderboardComponent implements OnInit {
   title = 'Golf Scores';
   holes = '';
   loadData() {
-    this.golfDataService.getGolfCourse().then(res => { // Success
+    this.golfDataService.getAllGolfCourses().then(res => { // Success
       this.holes = res.Items;
       console.log(res.Items);
     });

@@ -16,8 +16,15 @@ export class GolfDataService {
   }
 
 
-  getGolfCourse() {
-    return this.http.post(`${environment.apiUrl}/getCourse`, '')
+  getAllGolfCourses() {
+    return this.http.get(`${environment.apiUrl}/course`)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  getAllGolfRounds() {
+    return this.http.get(`${environment.apiUrl}/round`)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleErrorPromise);
@@ -25,6 +32,13 @@ export class GolfDataService {
 
   putPlayer(data: any) {
     return this.http.put(`${environment.apiUrl}/golfer`, data)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  putCourse(data: any) {
+    return this.http.put(`${environment.apiUrl}/course`, data)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleErrorPromise);

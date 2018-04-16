@@ -1,0 +1,18 @@
+<h1>Rounds</h1>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let round of rounds; let i = index">
+    <td>{{i+1}}</td>
+    <td>{{round.name}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<a class="btn btn-primary" routerLink="/addRound">Create New Round</a>

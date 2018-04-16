@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Golfer } from '../models/golfer';
-import { GolfDataService } from '../shared/services/golf-data.service';
+import { Golfer } from '../../models/golfer';
+import { GolfDataService } from '../../shared/services/golf-data.service';
 
 @Component({
   selector: 'app-golfer-form',
@@ -11,7 +11,7 @@ export class GolferFormComponent implements OnInit {
 
   constructor( private golfDataService: GolfDataService) { }
 
-  model = new Golfer('13', '', '', null);
+  model = new Golfer('', '', null);
 
   submitted = false;
 
