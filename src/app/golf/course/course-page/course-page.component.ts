@@ -10,13 +10,17 @@ import { GolfDataService } from '../../shared/services/golf-data.service';
 export class CoursePageComponent implements OnInit {
 
   constructor(private golfDataService: GolfDataService) { }
-
+  selectedCourse;
   courses = '';
   loadData() {
     this.golfDataService.getAllGolfCourses().then(res => { // Success
       this.courses = res.Items;
     });
   }
+  selectCourse(event: any, course: any) {
+    this.selectedCourse = course;
+  }
+
 
   ngOnInit() {
     this.loadData();

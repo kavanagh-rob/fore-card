@@ -23,6 +23,13 @@ export class GolfDataService {
       .catch(this.handleErrorPromise);
   }
 
+  getAllGolfers() {
+    return this.http.get(`${environment.apiUrl}/golfer`)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
   getAllGolfRounds() {
     return this.http.get(`${environment.apiUrl}/round`)
       .toPromise()

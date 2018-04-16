@@ -12,7 +12,7 @@ import {ViewChild} from '@angular/core';
 export class RoundFormComponent implements OnInit {
 
   constructor(private golfDataService: GolfDataService) { }
-  @ViewChild('courseForm') courseForm;
+  @ViewChild('courseList') courseList;
 
   courses = '';
   golfers = '';
@@ -30,7 +30,7 @@ export class RoundFormComponent implements OnInit {
   // }
 
   ngOnInit() {
-    console.log(this.courseForm);
+    console.log(this.courseList);
     this.loadCourses();
     // this.loadGolfers();
   }

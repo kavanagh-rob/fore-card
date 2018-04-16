@@ -14,7 +14,6 @@ export class LeaderboardComponent implements OnInit {
   loadData() {
     this.golfDataService.getAllGolfCourses().then(res => { // Success
       this.holes = res.Items;
-      console.log(res.Items);
     });
   }
 

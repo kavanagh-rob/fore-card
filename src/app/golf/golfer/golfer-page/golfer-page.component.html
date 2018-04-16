@@ -1,0 +1,20 @@
+<h3>Available Golfers</h3>
+
+<table class="table hoverTable">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Handicap</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let golfer of golfers; let i = index;" (click)="selectGolfer(golfer)" [class.highlighted]="isSelectedGolfer(golfer)">
+    <td>{{i+1}}</td>
+    <td>{{golfer.name}}</td>
+    <td>{{golfer.handicap}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<a class="btn btn-primary" routerLink="/addGolfer">Add Golfer</a>

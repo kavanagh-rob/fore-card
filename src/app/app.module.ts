@@ -14,6 +14,7 @@ import { HomepageComponent } from './golf/homepage/homepage.component';
 import { CoursePageComponent } from './golf/course/course-page/course-page.component';
 import { RoundPageComponent } from './golf/rounds/round-page/round-page.component';
 import { RoundFormComponent } from './golf/rounds/round-form/round-form.component';
+import { GolferPageComponent } from './golf/golfer/golfer-page/golfer-page.component';
 
 
 const appRoutes: Routes = [
@@ -36,6 +37,10 @@ const appRoutes: Routes = [
   {
     path: 'addGolfer',
     component: GolferFormComponent
+  },
+  {
+    path: 'golfers',
+    component: GolferPageComponent
   },
   {
     path: 'course',
@@ -70,7 +75,8 @@ const appRoutes: Routes = [
     HomepageComponent,
     CoursePageComponent,
     RoundPageComponent,
-    RoundFormComponent
+    RoundFormComponent,
+    GolferPageComponent
   ],
   imports: [
     RouterModule.forRoot(
