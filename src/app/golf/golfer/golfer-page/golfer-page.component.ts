@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GolfDataService} from '../../shared/services/golf-data.service';
 import {Golfer} from '../../models/golfer';
+import {Router, NavigationExtras, NavigationEnd} from '@angular/router';
 
 @Component({
   selector: 'app-golfer-page',
@@ -8,7 +9,8 @@ import {Golfer} from '../../models/golfer';
   styleUrls: ['./golfer-page.component.css']
 })
 export class GolferPageComponent implements OnInit {
-  constructor(private golfDataService: GolfDataService) { }
+  constructor(private golfDataService: GolfDataService, private router: Router) {
+  }
   selectedGolfers = new Array<Golfer>();
   golfers = '';
   loadData() {
@@ -16,14 +18,29 @@ export class GolferPageComponent implements OnInit {
       this.golfers = res.Items;
     });
   }
-  selectGolfer(golfer: any) {
-    this.selectedGolfers.push(golfer);
+  selectGolfer(golfer: Golfer) {
+    if (this.isSelectedGolfer((golfer))) {
+        this.removeFromGolfers(golfer);
+    } else {
+      this.selectedGolfers.push(golfer);
+    }
   }
-  isSelectedGolfer( golfer: any) {
+  isSelectedGolfer( golfer: Golfer) {
     return this.selectedGolfers.find(item => (item.email === golfer.email));
   }
 
+  removeFromGolfers( golfer: Golfer) {
+    this.selectedGolfers = this.selectedGolfers.filter(function( obj ) {
+      return obj.email !== golfer.email;
+    });
+  }
 
+  editGolfer( golfer: Golfer ) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: golfer
+    };
+    this.router.navigate(['editGolfer'], navigationExtras);
+  }
   ngOnInit() {
     this.loadData();
   }

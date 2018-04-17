@@ -20,10 +20,9 @@ export class GolferFormComponent implements OnInit {
     const data: any = {};
     data.item = this.model;
     this.golfDataService.putPlayer(data).then(res => { // Success
-      console.log('golfer put success');
+      this.submitted = true;
+      this.router.navigate(['/golfers']);
     });
-    this.submitted = true;
-    this.router.navigate(['/golfers']);
   }
 
   // TODO: Remove this when we're done

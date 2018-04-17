@@ -6,6 +6,7 @@
     <th scope="col">#</th>
     <th scope="col">Name</th>
     <th scope="col">Handicap</th>
+    <th scope="col"></th>
   </tr>
   </thead>
   <tbody>
@@ -13,8 +14,10 @@
     <td>{{i+1}}</td>
     <td>{{golfer.name}}</td>
     <td>{{golfer.handicap}}</td>
+    <td><a class="link" (click)="editGolfer(golfer)">Edit</a></td>
   </tr>
   </tbody>
 </table>
 
 <a class="btn btn-primary" routerLink="/addGolfer">Add Golfer</a>
+

@@ -15,6 +15,7 @@ import { CoursePageComponent } from './golf/course/course-page/course-page.compo
 import { RoundPageComponent } from './golf/rounds/round-page/round-page.component';
 import { RoundFormComponent } from './golf/rounds/round-form/round-form.component';
 import { GolferPageComponent } from './golf/golfer/golfer-page/golfer-page.component';
+import { EditGolferComponent } from './golf/golfer/edit-golfer/edit-golfer.component';
 
 
 const appRoutes: Routes = [
@@ -25,6 +26,14 @@ const appRoutes: Routes = [
   {
     path: 'rounds',
     component: RoundPageComponent
+  },
+  {
+    path: 'round/:id',
+    children: [
+      { path: '', redirectTo: 'leaderboard', pathMatch: 'full' },
+      // { path: 'overview', component: HomepageComponent },
+      { path: 'leaderboard', component: LeaderboardComponent },
+    ]
   },
   {
     path: 'addRound',
@@ -39,11 +48,15 @@ const appRoutes: Routes = [
     component: GolferFormComponent
   },
   {
+    path: 'editGolfer',
+    component: EditGolferComponent
+  },
+  {
     path: 'golfers',
     component: GolferPageComponent
   },
   {
-    path: 'course',
+    path: 'courses',
     component: CoursePageComponent
   },
   {
@@ -76,12 +89,13 @@ const appRoutes: Routes = [
     CoursePageComponent,
     RoundPageComponent,
     RoundFormComponent,
-    GolferPageComponent
+    GolferPageComponent,
+    EditGolferComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false }, // <-- debugging purposes only
     ),
     BrowserModule,
     HttpClientModule,

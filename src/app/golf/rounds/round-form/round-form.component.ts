@@ -16,23 +16,8 @@ export class RoundFormComponent implements OnInit {
 
   courses = '';
   golfers = '';
-  loadCourses() {
-
-    this.golfDataService.getAllGolfCourses().then(res => { // Success
-      this.courses = res.Items;
-    });
-  }
-  // loadGolfers() {
-  //   this.golfDataService.getAllGolfCourses().then(res => { // Success
-  //     this.golfers = res.Items;
-  //     console.log(res.Items);
-  //   });
-  // }
 
   ngOnInit() {
-    console.log(this.courseList);
-    this.loadCourses();
-    // this.loadGolfers();
   }
 
 }
