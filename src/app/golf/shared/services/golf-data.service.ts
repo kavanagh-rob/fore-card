@@ -50,4 +50,11 @@ export class GolfDataService {
       .then(this.extractData)
       .catch(this.handleErrorPromise);
   }
+
+  putRound(data: any) {
+    return this.http.put(`${environment.apiUrl}/round`, data)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
 }
