@@ -37,6 +37,13 @@ export class GolfDataService {
       .catch(this.handleErrorPromise);
   }
 
+  getGolfRound(roundId) {
+    return this.http.get(`${environment.apiUrl}/round/` + roundId)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
   putPlayer(data: any) {
     return this.http.put(`${environment.apiUrl}/golfer`, data)
       .toPromise()

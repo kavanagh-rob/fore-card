@@ -1,16 +1,20 @@
 <h1>Rounds</h1>
 
-<table class="table">
+<table class="table hoverTable">
   <thead>
   <tr>
     <th scope="col">#</th>
     <th scope="col">Name</th>
+    <th scope="col">Course</th>
+    <th scope="col">No of Players</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let round of rounds; let i = index">
+  <tr *ngFor="let round of rounds; let i = index" (click)="goToRound(round.round_id)" >
     <td>{{i+1}}</td>
-    <td>{{round.name}}</td>
+    <td>{{round.round_id}}</td>
+    <td>{{round.course.name}}</td>
+    <td>{{round.golfers.length}}</td>
   </tr>
   </tbody>
 </table>

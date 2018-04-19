@@ -16,6 +16,7 @@ import { RoundPageComponent } from './golf/rounds/round-page/round-page.componen
 import { RoundFormComponent } from './golf/rounds/round-form/round-form.component';
 import { GolferPageComponent } from './golf/golfer/golfer-page/golfer-page.component';
 import { EditGolferComponent } from './golf/golfer/edit-golfer/edit-golfer.component';
+import {CourseResolver} from './golf/shared/resolvers/course-resolver';
 
 
 const appRoutes: Routes = [
@@ -28,11 +29,15 @@ const appRoutes: Routes = [
     component: RoundPageComponent
   },
   {
-    path: 'round/:id',
+    path: 'round/:round_id',
     children: [
-      { path: '', redirectTo: 'leaderboard', pathMatch: 'full' },
-      // { path: 'overview', component: HomepageComponent },
-      { path: 'leaderboard', component: LeaderboardComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomepageComponent },
+      { path: 'leaderboard', component: LeaderboardComponent,
+        resolve: {
+          resolvedRound: CourseResolver
+        }},
+      { path: 'golfers', component: GolferPageComponent }
     ]
   },
   {
@@ -102,7 +107,7 @@ const appRoutes: Routes = [
     FormsModule
   ],
 
-  providers: [GolfDataService],
+  providers: [GolfDataService, CourseResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

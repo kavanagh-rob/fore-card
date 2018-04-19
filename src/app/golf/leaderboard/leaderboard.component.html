@@ -1,12 +1,12 @@
 <div>
-  <table>
+  <table class="table hoverTable">
     <tr>
-      <th>Hole</th>
-      <th>Par</th>
+      <th>Name</th>
+      <th>Handicap</th>
     </tr>
-    <tr *ngFor="let hole of holes">
-      <td>{{ hole.hole_id }}</td>
-      <td>{{ hole.par }}</td>
+    <tr *ngFor="let golfer of course.golfers">
+      <td>{{ golfer.name }}</td>
+      <td>{{ golfer.handicap }}</td>
     </tr>
   </table>
 </div>
