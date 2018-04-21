@@ -12,7 +12,7 @@ export class GolferFormComponent implements OnInit {
 
   constructor( private golfDataService: GolfDataService,  private router: Router) { }
 
-  model = new Golfer('', '', null);
+  model = new Golfer(null, '', '', null);
 
   submitted = false;
 
@@ -23,6 +23,10 @@ export class GolferFormComponent implements OnInit {
       this.submitted = true;
       this.router.navigate(['/golfers']);
     });
+  }
+
+  isEditGolfer() {
+    return this.router.url.includes('editGolfer');
   }
 
   // TODO: Remove this when we're done

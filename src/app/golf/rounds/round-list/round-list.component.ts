@@ -5,10 +5,10 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-round-page',
-  templateUrl: './round-page.component.html',
-  styleUrls: ['./round-page.component.css']
+  templateUrl: './round-list.component.html',
+  styleUrls: ['./round-list.component.css']
 })
-export class RoundPageComponent implements OnInit {
+export class RoundListComponent implements OnInit {
 
   constructor(private golfDataService: GolfDataService,  private router: Router) { }
   rounds = '';

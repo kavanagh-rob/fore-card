@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
+import { GolfSearchRequest } from '../../models/golfSearchRequest';
 
 @Injectable()
 export class GolfDataService {
@@ -25,6 +26,13 @@ export class GolfDataService {
 
   getAllGolfers() {
     return this.http.get(`${environment.apiUrl}/golfer`)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+  getGolfersForRound(roundId) {
+    const request = new GolfSearchRequest(roundId, '');
+    return this.http.post(`${environment.apiUrl}/golfer`, request)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleErrorPromise);

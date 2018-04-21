@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GolfDataService } from '../shared/services/golf-data.service';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -11,10 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 export class LeaderboardComponent implements OnInit {
 
   constructor( private route: ActivatedRoute) {}
-  course ;
+  round ;
 
   ngOnInit() {
-    this.course = this.route.snapshot.data['resolvedRound'].Item;
+    this.round = this.route.snapshot.data['resolvedRound'].Item;
   }
 
 }

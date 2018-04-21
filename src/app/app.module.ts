@@ -11,42 +11,38 @@ import { GolferFormComponent } from './golf/golfer/golfer-form/golfer-form.compo
 import {FormControl, FormsModule, NgControl} from '@angular/forms';
 import { CourseFormComponent } from './golf/course/course-form/course-form.component';
 import { HomepageComponent } from './golf/homepage/homepage.component';
-import { CoursePageComponent } from './golf/course/course-page/course-page.component';
-import { RoundPageComponent } from './golf/rounds/round-page/round-page.component';
+import { CourseListComponent } from './golf/course/course-list/course-list.component';
+import { RoundListComponent } from './golf/rounds/round-list/round-list.component';
 import { RoundFormComponent } from './golf/rounds/round-form/round-form.component';
-import { GolferPageComponent } from './golf/golfer/golfer-page/golfer-page.component';
+import { GolferListComponent } from './golf/golfer/golfer-list/golfer-list.component';
 import { EditGolferComponent } from './golf/golfer/edit-golfer/edit-golfer.component';
+import { ScoreCardComponent } from './golf/score-card/score-card.component';
 import {CourseResolver} from './golf/shared/resolvers/course-resolver';
+import {GolferResolver} from './golf/shared/resolvers/golfer-resolver';
+import { GolferComponent } from './golf/golfer/golfer/golfer.component';
 
 
 const appRoutes: Routes = [
   {
-    path: 'home',
-    component: HomepageComponent
-  },
-  {
     path: 'rounds',
-    component: RoundPageComponent
+    component: RoundListComponent
   },
   {
     path: 'round/:round_id',
+    resolve: {
+      resolvedRound: CourseResolver
+    },
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomepageComponent },
-      { path: 'leaderboard', component: LeaderboardComponent,
-        resolve: {
-          resolvedRound: CourseResolver
-        }},
-      { path: 'golfers', component: GolferPageComponent }
-    ]
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'overview', component: HomepageComponent },
+      { path: 'leaderboard', component: LeaderboardComponent},
+      { path: 'golfers', component: GolferListComponent},
+      {path: 'golfer/:golfer_id', component: GolferComponent}
+      ]
   },
   {
     path: 'addRound',
     component: RoundFormComponent
-  },
-  {
-    path: 'leaderboard',
-    component: LeaderboardComponent
   },
   {
     path: 'addGolfer',
@@ -58,24 +54,18 @@ const appRoutes: Routes = [
   },
   {
     path: 'golfers',
-    component: GolferPageComponent
+    component: GolferListComponent
   },
-  {
+   {
     path: 'courses',
-    component: CoursePageComponent
+    component: CourseListComponent
   },
   {
     path: 'addCourse',
     component: CourseFormComponent
   },
-  // { path: 'hero/:id',      component: HeroDetailComponent },
-  // {
-  //   path: 'heroes',
-  //   component: HeroListComponent,
-  //   data: { title: 'Heroes List' }
-  // },
   { path: '',
-    redirectTo: '/home',
+    redirectTo: '/rounds',
     pathMatch: 'full'
   },
   { path: 'pageNotFound', component: PageNotFoundComponent },
@@ -91,11 +81,13 @@ const appRoutes: Routes = [
     GolferFormComponent,
     CourseFormComponent,
     HomepageComponent,
-    CoursePageComponent,
-    RoundPageComponent,
+    CourseListComponent,
+    RoundListComponent,
     RoundFormComponent,
-    GolferPageComponent,
-    EditGolferComponent
+    GolferListComponent,
+    EditGolferComponent,
+    ScoreCardComponent,
+    GolferComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -107,7 +99,7 @@ const appRoutes: Routes = [
     FormsModule
   ],
 
-  providers: [GolfDataService, CourseResolver],
+  providers: [GolfDataService, CourseResolver, GolferResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

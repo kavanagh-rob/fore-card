@@ -1,0 +1,18 @@
+<div>
+  <table class="table hoverTable">
+    <tr>
+      <th>Hole</th>
+      <th>Par</th>
+      <th>Index</th>
+      <th>{{golfer.name}}</th>
+      <th>stableford</th>
+    </tr>
+    <tr *ngFor="let hole of round.course.holes; let i = index;">
+      <td>{{ i+1}}</td>
+      <td>{{ hole.par }}</td>
+      <td>{{ hole.index }}</td>
+      <td><input [(ngModel)]="golfer.scoreCard[i]" type="number"></td>
+      <td>{{getStableford(hole, i)}}</td>
+    </tr>
+  </table>
+</div>

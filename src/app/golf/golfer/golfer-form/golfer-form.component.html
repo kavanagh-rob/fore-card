@@ -11,7 +11,7 @@
     </div>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="text" class="form-control" [(ngModel)]="model.email" id="email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+      <input type="text" class="form-control"  [(ngModel)]="model.email" id="email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
     </div>
     <div [hidden]="email.valid || email.pristine"
          class="alert alert-danger">
@@ -24,6 +24,10 @@
            class="alert alert-danger">
         Numerical Handicap is required
       </div>
+    </div>
+    <div class="form-group" [hidden]="!isEditGolfer()">
+      <label for="golfer_id">golfer_id</label>
+      <input type="text"  class="form-control" [readonly]="isEditGolfer()" [(ngModel)]="model.golfer_id" id="golfer_id" name="golfer_id">
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
