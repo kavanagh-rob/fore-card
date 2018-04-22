@@ -8,9 +8,9 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let course of courses; let i = index;" (click)="selectCourse($event, course)" [class.highlighted]="selectedCourse && course.name === selectedCourse.name">
+  <tr *ngFor="let course of courses; let i = index;" (click)="selectCourse($event, course)" [class.highlighted]="selectedCourse && course.course_id === selectedCourse.name">
     <td>{{i+1}}</td>
-    <td>{{course.name}}</td>
+    <td>{{course.course_id}}</td>
   </tr>
   </tbody>
 </table>

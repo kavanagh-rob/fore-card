@@ -72,4 +72,17 @@ export class GolfDataService {
       .then(this.extractData)
       .catch(this.handleErrorPromise);
   }
+  getScorecards(scorecardIds) {
+    return this.http.post(`${environment.apiUrl}/scorecard`, scorecardIds)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  putScorecard(data: any) {
+    return this.http.put(`${environment.apiUrl}/scorecard` , data)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
 }

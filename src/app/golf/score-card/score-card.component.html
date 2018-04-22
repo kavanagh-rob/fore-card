@@ -4,15 +4,27 @@
       <th>Hole</th>
       <th>Par</th>
       <th>Index</th>
-      <th>{{golfer.name}}</th>
+      <th *ngFor="let golfer of golfers; let i = index;">{{golfer.name}}</th>
       <th>stableford</th>
     </tr>
     <tr *ngFor="let hole of round.course.holes; let i = index;">
       <td>{{ i+1}}</td>
       <td>{{ hole.par }}</td>
       <td>{{ hole.index }}</td>
-      <td><input [(ngModel)]="golfer.scoreCard[i]" type="number"></td>
-      <td>{{getStableford(hole, i)}}</td>
+      <td>
+        <select style="width: 40px" type="number" [(ngModel)]="scoreCards[0].baseScores[i]" (ngModelChange)="setStableFordScores(0)" name ="stablefordScore-{{i}}" id="index-{{i}}" >
+          <option style="font-weight: bold;" *ngFor="let index of scoreOptions" [value]="index">{{index}}</option>
+        </select>
+      </td>
+      <td [hidden]="getStableford(hole, i, 0) === 0" >{{scoreCards[0].stablefordScores[i]}}</td>
+      <td [hidden]="!(getStableford(hole, i, 0) === 0)" style="color: red; font-weight: bold;">-</td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><div>{{getTotalPoints(0)}}</div></td>
     </tr>
   </table>
 </div>

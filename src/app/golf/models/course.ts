@@ -2,7 +2,7 @@ import { Hole } from '../models/hole';
 
 export class Course {
   constructor(
-    public name: string,
+    public course_id: string,
     public holes: Array<Hole>,
 
   ) {  }

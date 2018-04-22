@@ -35,9 +35,8 @@ export class CourseFormComponent implements OnInit {
 
 
 
-  model = new Course('name', this.holes);
+  model = new Course( 'name', this.holes);
   totalPar = null;
-
   submitted = false;
   indexFormValid = true;
   parFormValid = true;
@@ -73,9 +72,9 @@ export class CourseFormComponent implements OnInit {
     this.validateForms();
     const data: any = {};
     data.item = this.model;
+    data.table_name = 'Courses';
     this.golfDataService.putCourse(data).then(res => { // Success
-      console.log('Course put success');
-      this.router.navigate(['/course']);
+      this.router.navigate(['/courses']);
     });
   }
 

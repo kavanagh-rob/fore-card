@@ -5,5 +5,4 @@ export class Golfer {
     public email: string,
     public handicap: number
   ) {  }
-  public scoreCard: number[];
 }
