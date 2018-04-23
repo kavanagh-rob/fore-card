@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import { GolfSearchRequest } from '../../models/golfSearchRequest';
+import {consoleTestResultHandler} from 'tslint/lib/test';
 
 @Injectable()
 export class GolfDataService {
@@ -79,8 +80,22 @@ export class GolfDataService {
       .catch(this.handleErrorPromise);
   }
 
+  getScorecardsForRound(roundId) {
+    return this.http.get(`${environment.apiUrl}/scorecard/` + roundId)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
   putScorecard(data: any) {
     return this.http.put(`${environment.apiUrl}/scorecard` , data)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  updateScorecards(data) {
+    return this.http.post(`${environment.apiUrl}/scorecard`, data)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleErrorPromise);

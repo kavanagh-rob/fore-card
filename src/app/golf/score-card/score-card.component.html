@@ -16,15 +16,16 @@
           <option style="font-weight: bold;" *ngFor="let index of scoreOptions" [value]="index">{{index}}</option>
         </select>
       </td>
-      <td [hidden]="getStableford(hole, i, 0) === 0" >{{scoreCards[0].stablefordScores[i]}}</td>
-      <td [hidden]="!(getStableford(hole, i, 0) === 0)" style="color: red; font-weight: bold;">-</td>
+      <td [hidden]="!(scoreCards[0].stablefordScores[i] || scoreCards[0].stablefordScores[i] === 0 )" >{{scoreCards[0].stablefordScores[i]}}</td>
+      <td [hidden]="(scoreCards[0].stablefordScores[i] || scoreCards[0].stablefordScores[i] === 0 )" style="color: red; font-weight: bold;">-</td>
     </tr>
     <tr>
       <td>Total</td>
       <td></td>
       <td></td>
       <td></td>
-      <td><div>{{getTotalPoints(0)}}</div></td>
+      <td>{{scoreCards[0].totalStablefordScore}}</td>
     </tr>
   </table>
+  <button  (click)="submitScoreCard()" class="btn btn-success">Update Scorecard</button>
 </div>

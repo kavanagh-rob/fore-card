@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Golfer} from '../models/golfer';
 import { GolfDataService } from '../shared/services/golf-data.service';
 import {ScoreCard} from '../models/scoreCards';
@@ -11,32 +11,37 @@ import {ScoreCard} from '../models/scoreCards';
 })
 export class ScoreCardComponent implements OnInit {
 
-  constructor( private route: ActivatedRoute, private  golfDataService: GolfDataService) {
+  constructor(  private router: Router,  private route: ActivatedRoute, private  golfDataService: GolfDataService) {
     this.route.params.subscribe( params =>
       this.golferId = params['golfer_id']
     );
     this.round = this.route.snapshot.data['resolvedRound'].Item;
+    this.golfers = this.getSelectedGolfers();
     this.golfDataService.getScorecards( this.getScorecardIdsRequest() ).then(res => { // Success
       this.scoreCards = res.Responses.ScoreCards;
     });
-    this.golfers = this.getSelectedGolfers();
   }
   scoreOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, ' /'];
   round ;
   golferId;
+  golferIdList = [];
   golfers;
-  scoreCards = [{baseScores: [], stablefordScores: []}]
-  scorecardIds;
+  scoreCards = [{totalStablefordScore: 0, baseScores: [], stablefordScores: []}];
 
   ngOnInit() {
   }
 
   getScorecardIdsRequest() {
-    this.scorecardIds = [];
+    const self = this;
+    const scorecardIds = [];
     if ( this.golferId ) {
-      this.scorecardIds.push({scorecard_id: this.round.round_id + '|' + this.golferId});
+      scorecardIds.push({scorecard_id: this.round.round_id + '|' + this.golferId});
+    } else if ( this.golferIdList ) {
+      this.golferIdList.forEach(function (golferId) {
+        scorecardIds.push({scorecard_id: this.round.round_id + '|' + golferId});
+      });
     }
-    return this.scorecardIds;
+    return {getData : scorecardIds};
   }
   getSelectedGolfers() {
     const self = this;
@@ -49,10 +54,11 @@ export class ScoreCardComponent implements OnInit {
   setStableFordScores(golferIndex) {
     const self = this;
     const golfer = this.golfers[ golferIndex ];
+    const scorecard = self.getScorecardByGolferId(golfer.golfer_id);
     this.round.course.holes.forEach(function (hole, index) {
-      const scorecard = self.getScorecardByGolferId(golfer.golfer_id);
       scorecard.stablefordScores[index] = self.getStableford(hole, index, golfer) ;
     });
+    scorecard.totalStablefordScore = this.getTotalPoints(golferIndex);
   }
 
   getStableford(hole, number, golfer) {
@@ -95,11 +101,20 @@ export class ScoreCardComponent implements OnInit {
     let totalPoints = 0;
     const golferId = this.golfers[golferIndex].golfer_id;
     const scorecard = this.getScorecardByGolferId(golferId);
-    scorecard.stablefordScores.forEach(function (value) {
-      if (value) {
-        totalPoints = totalPoints +  parseInt(value, 10);
-      }
-    });
+    if (scorecard) {
+      scorecard.stablefordScores.forEach(function (value) {
+        if (value) {
+          totalPoints = totalPoints +  parseInt(value, 10);
+        }
+      });
+    }
     return totalPoints;
+  }
+
+  submitScoreCard() {
+    const updateData = {updateScorecards: this.scoreCards};
+    this.golfDataService.updateScorecards( updateData ).then(res => { // Success
+      this.router.navigate(['round/' + this.round.round_id + '/leaderboard']);
+    });
   }
 }

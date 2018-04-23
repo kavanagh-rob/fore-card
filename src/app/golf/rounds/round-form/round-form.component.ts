@@ -39,7 +39,7 @@ export class RoundFormComponent implements OnInit {
 
     this.golferList.selectedGolfers.forEach(function (golfer) {
       const scoreCardId =  self.round_id + '|' + golfer.golfer_id;
-      const scoreCard = new ScoreCard(scoreCardId, golfer.golfer_id, self.round_id, [], []);
+      const scoreCard = new ScoreCard(scoreCardId, golfer.golfer_id, golfer.name, self.round_id, [], []);
       const scorecardData = {item: scoreCard, table_name: 'ScoreCards'};
       self.golfDataService.putScorecard(scorecardData).then(res => { // Success
       });

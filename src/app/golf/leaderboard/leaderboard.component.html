@@ -4,9 +4,9 @@
       <th>Name</th>
       <th>Handicap</th>
     </tr>
-    <tr *ngFor="let golfer of round.golfers">
-      <td>{{ golfer.name }}</td>
-      <td>{{ golfer.handicap }}</td>
+    <tr *ngFor="let scorescard of scorecards">
+      <td>{{ scorescard.golfer_name }}</td>
+      <td>{{ scorescard.totalStablefordScore }}</td>
     </tr>
   </table>
 </div>
