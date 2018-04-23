@@ -2,10 +2,10 @@
   <table class="table hoverTable">
     <tr>
       <th>Name</th>
-      <th>Handicap</th>
+      <th>Score</th>
     </tr>
     <tr *ngFor="let scorescard of scorecards">
-      <td>{{ scorescard.golfer_name }}</td>
+      <td>{{ getSelectedGolferName(scorescard.golfer_id) }}</td>
       <td>{{ scorescard.totalStablefordScore }}</td>
     </tr>
   </table>

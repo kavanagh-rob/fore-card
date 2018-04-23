@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GolfDataService } from '../shared/services/golf-data.service';
+import {Golfer} from '../models/golfer';
 
 
 @Component({
@@ -21,5 +22,14 @@ export class LeaderboardComponent implements OnInit {
       this.scorecards = res.Items;
     });
   }
+
+  getSelectedGolferName(golferId) {
+      return this.getSelectedGolfer(golferId).name;
+  }
+  getSelectedGolfer(golferId) {
+      return this.round.golfers.filter(function(obj: Golfer) {
+        return obj['golfer_id'] === golferId;
+      })[0];
+    }
 
 }

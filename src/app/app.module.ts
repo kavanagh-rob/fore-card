@@ -10,8 +10,8 @@ import { PageNotFoundComponent } from './golf/page-not-found/page-not-found.comp
 import { GolferFormComponent } from './golf/golfer/golfer-form/golfer-form.component';
 import {FormControl, FormsModule, NgControl} from '@angular/forms';
 import { CourseFormComponent } from './golf/course/course-form/course-form.component';
-import { HomepageComponent } from './golf/homepage/homepage.component';
 import { CourseListComponent } from './golf/course/course-list/course-list.component';
+import { RoundOverviewComponent } from './golf/rounds/round-overview/round-overview.component';
 import { RoundListComponent } from './golf/rounds/round-list/round-list.component';
 import { RoundFormComponent } from './golf/rounds/round-form/round-form.component';
 import { GolferListComponent } from './golf/golfer/golfer-list/golfer-list.component';
@@ -20,6 +20,7 @@ import { ScoreCardComponent } from './golf/score-card/score-card.component';
 import {CourseResolver} from './golf/shared/resolvers/course-resolver';
 import {GolferResolver} from './golf/shared/resolvers/golfer-resolver';
 import { GolferComponent } from './golf/golfer/golfer/golfer.component';
+import { GroupComponent } from './golf/group/group.component';
 
 
 const appRoutes: Routes = [
@@ -34,10 +35,11 @@ const appRoutes: Routes = [
     },
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      { path: 'overview', component: HomepageComponent },
+      { path: 'overview', component: RoundOverviewComponent },
       { path: 'leaderboard', component: LeaderboardComponent},
       { path: 'golfers', component: GolferListComponent},
-      {path: 'golfer/:golfer_id', component: GolferComponent}
+      {path: 'golfer/:golfer_id', component: GolferComponent},
+      {path: 'groups', component: GroupComponent}
       ]
   },
   {
@@ -80,14 +82,15 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     GolferFormComponent,
     CourseFormComponent,
-    HomepageComponent,
+    RoundOverviewComponent,
     CourseListComponent,
     RoundListComponent,
     RoundFormComponent,
     GolferListComponent,
     EditGolferComponent,
     ScoreCardComponent,
-    GolferComponent
+    GolferComponent,
+    GroupComponent
   ],
   imports: [
     RouterModule.forRoot(
