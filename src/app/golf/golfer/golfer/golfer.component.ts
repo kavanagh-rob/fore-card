@@ -12,6 +12,6 @@ export class GolferComponent implements OnInit {
   round ;
 
   ngOnInit() {
-    this.round = this.route.snapshot.data['resolvedRound'].Item;
+    this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
   }
 }

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GolfDataService } from '../shared/services/golf-data.service';
-import {Golfer} from '../models/golfer';
+import { GolfDataService } from '../../shared/services/golf-data.service';
+import {Golfer} from '../../models/golfer';
 
 
 @Component({
   selector: 'app-leaderboard',
-  templateUrl: './leaderboard.component.html',
-  styleUrls: ['./leaderboard.component.css']
+  templateUrl: './round-leaderboard.component.html',
+  styleUrls: ['./round-leaderboard.component.css']
 })
-export class LeaderboardComponent implements OnInit {
+export class RoundLeaderboardComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, private  golfDataService: GolfDataService) {
-    this.round = this.route.snapshot.data['resolvedRound'].Item;
+    console.log(this.route);
+    this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
   }
   round;
   scorecards = [];

@@ -57,8 +57,8 @@ export class GolferListComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.route.snapshot.data['resolvedRound']) {
-      this.round = this.route.snapshot.data['resolvedRound'].Item;
+    if (this.route.snapshot.parent.data['resolvedRound']) {
+      this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
       this.golfers = this.round.golfers;
     } else {
       this.loadAllGolfers();

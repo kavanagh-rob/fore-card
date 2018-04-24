@@ -15,7 +15,7 @@ export class ScoreCardComponent implements OnInit {
     this.route.params.subscribe( params =>
       this.golferId = params['golfer_id']
     );
-    this.round = this.route.snapshot.data['resolvedRound'].Item;
+    this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
     this.golfers = this.getSelectedGolfers();
     this.golfDataService.getScorecards( this.getScorecardIdsRequest() ).then(res => { // Success
       this.scoreCards = res.Responses.ScoreCards;
@@ -114,7 +114,7 @@ export class ScoreCardComponent implements OnInit {
   submitScoreCard() {
     const updateData = {updateScorecards: this.scoreCards};
     this.golfDataService.updateScorecards( updateData ).then(res => { // Success
-      this.router.navigate(['round/' + this.round.round_id + '/leaderboard']);
+      this.router.navigate(['round/' + this.round.round_id + '/round-leaderboard']);
     });
   }
 }

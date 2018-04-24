@@ -1,0 +1,14 @@
+<div>
+  <table class="table hoverTable">
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+    <tr *ngFor="let scorescard of scorecards">
+      <td>{{ getSelectedGolferName(scorescard.golfer_id) }}</td>
+      <td>{{ scorescard.totalStablefordScore }}</td>
+    </tr>
+  </table>
+</div>
+
+<button mat-button>My Button</button>

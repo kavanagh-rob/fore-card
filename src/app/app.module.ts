@@ -6,7 +6,7 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GolfDataService } from './golf/shared/services/golf-data.service';
-import { LeaderboardComponent } from './golf/leaderboard/leaderboard.component';
+import { RoundLeaderboardComponent } from './golf/rounds/round-leaderboard/round-leaderboard.component';
 import { PageNotFoundComponent } from './golf/page-not-found/page-not-found.component';
 import { GolferFormComponent } from './golf/golfer/golfer-form/golfer-form.component';
 import {FormControl, FormsModule, NgControl} from '@angular/forms';
@@ -22,26 +22,14 @@ import {CourseResolver} from './golf/shared/resolvers/course-resolver';
 import {GolferResolver} from './golf/shared/resolvers/golfer-resolver';
 import { GolferComponent } from './golf/golfer/golfer/golfer.component';
 import { GroupComponent } from './golf/group/group.component';
+import {RoundRoutingModule} from './round-routing.module';
+import { RoundComponent } from './golf/rounds/round.component';
 
 
 const appRoutes: Routes = [
   {
     path: 'rounds',
     component: RoundListComponent
-  },
-  {
-    path: 'round/:round_id',
-    resolve: {
-      resolvedRound: CourseResolver
-    },
-    children: [
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      { path: 'overview', component: RoundOverviewComponent },
-      { path: 'leaderboard', component: LeaderboardComponent},
-      { path: 'golfers', component: GolferListComponent},
-      {path: 'golfer/:golfer_id', component: GolferComponent},
-      {path: 'groups', component: GroupComponent}
-      ]
   },
   {
     path: 'addRound',
@@ -79,7 +67,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LeaderboardComponent,
+    RoundLeaderboardComponent,
     PageNotFoundComponent,
     GolferFormComponent,
     CourseFormComponent,
@@ -91,13 +79,16 @@ const appRoutes: Routes = [
     EditGolferComponent,
     ScoreCardComponent,
     GolferComponent,
-    GroupComponent
+    GroupComponent,
+    RoundComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }, // <-- debugging purposes only
+      { enableTracing: false }, // <-- debugging purposes only
     ),
+    RoundRoutingModule,
+    RouterModule.forChild( appRoutes),
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,

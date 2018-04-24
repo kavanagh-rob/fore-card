@@ -10,7 +10,7 @@ import {GolfDataService} from '../../shared/services/golf-data.service';
 export class RoundOverviewComponent implements OnInit {
 
   constructor( private route: ActivatedRoute) {
-    this.round = this.route.snapshot.data['resolvedRound'].Item;
+    this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
   }
   round;
 
