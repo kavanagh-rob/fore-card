@@ -1,33 +1,28 @@
-<nav class="navbar navbar-dark bg-inverse">
+<!--nav class="navbar navbar-dark bg-inverse">
   <div class="container">
-    <ul class="nav navbar-nav" routerLinkActive="active">
-      <li class="nav-item"><a class="nav-link" routerLink="../home">Overview</a></li>
+    <ul class="nav nav-pills" routerLinkActive="active">
+      <li class="nav-item"><a class="nav-link active" routerLink="../overview">Overview</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="../leaderboard">Leaderboard</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="../golfers">Players</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="../groups">Groups</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="../course">Course</a></li>
     </ul>
   </div>
-</nav>
-
+</nav-->
+<mat-toolbar color="secondary">
+  <mat-toolbar-row>
+    <button mat-raised-button routerLink="../overview">Overview</button>
+    <button mat-button routerLink="../leaderboard">Leaderboard</button>
+    <button mat-button routerLink="../golfers">Golfers</button>
+    <button mat-button routerLink="../courses">Courses</button>
+  </mat-toolbar-row>
+</mat-toolbar>
 <div class="card text-center">
   <div class="card-header">
-    <ul class="nav nav-pills card-header-pills">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
   </div>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h2 class="card-title">Round : {{round.round_id}}</h2>
+    <p class="card-text">{{round.golfers.length}} players registered for round</p>
   </div>
 </div>
 
