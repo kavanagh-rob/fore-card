@@ -1,14 +1,36 @@
-<div>
-  <table class="table hoverTable">
-    <tr>
-      <th>Name</th>
-      <th>Score</th>
-    </tr>
-    <tr *ngFor="let scorescard of scorecards">
-      <td>{{ getSelectedGolferName(scorescard.golfer_id) }}</td>
-      <td>{{ scorescard.totalStablefordScore }}</td>
-    </tr>
-  </table>
+<div class="leaderboard-parent-container">
+  <section class="fairway-backdrop leaderboard-fairway-img-container">
+    <div id="leaderboardBg" class="leaderboard-base-img-container">
+      <img src="/assets/images/leaderboard-base-image.png" width="917" height="510" border="0" id="leaderboard-base-image">
+      <div class="leaderboard-table-content">
+        <table class="table hoverTable">
+          <tr>
+            <td class="table-cell-text">HOLE</td>
+            <td class="table-cell-index-number" *ngFor="let hole of round.course.holes; let i = index">{{ i+1 }}</td>
+            <td class="table-cell-text">TOTAL</td>
+          </tr>
+          <tr>
+            <td class="table-cell-text">PAR</td>
+            <td class="table-cell-index-number" *ngFor="let hole of round.course.holes;">{{ hole.par }}</td>
+          </tr>
+          <tr *ngFor="let scorecard of scorecards;">
+            <td class="table-cell-text">{{getSelectedGolferName(scorecard.golfer_id)}}</td>
+            <td class="table-cell-score-number" *ngFor="let score of scorecard.stablefordScores;">{{ score }}</td>
+            <td class="table-cell-text">{{scorecard.totalStablefordScore}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
 </div>
 
-<button mat-button>My Button</button>
+<!--<table class="table hoverTable">-->
+  <!--<tr>-->
+    <!--<th>Name</th>-->
+    <!--<th>Score</th>-->
+  <!--</tr>-->
+  <!--<tr *ngFor="let scorescard of scorecards">-->
+    <!--<td>{{ getSelectedGolferName(scorescard.golfer_id) }}</td>-->
+    <!--<td>{{ scorescard.totalStablefordScore }}</td>-->
+  <!--</tr>-->
+<!--</table>-->
