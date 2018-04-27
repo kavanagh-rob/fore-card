@@ -24,6 +24,7 @@ import { GolferComponent } from './golf/golfer/golfer/golfer.component';
 import { GroupComponent } from './golf/group/group.component';
 import {RoundRoutingModule} from './round-routing.module';
 import { RoundComponent } from './golf/rounds/round.component';
+import { SortStablefordPipe } from './golf/shared/pipes/sort-stableford.pipe';
 
 
 const appRoutes: Routes = [
@@ -80,7 +81,8 @@ const appRoutes: Routes = [
     ScoreCardComponent,
     GolferComponent,
     GroupComponent,
-    RoundComponent
+    RoundComponent,
+    SortStablefordPipe
   ],
   imports: [
     RouterModule.forRoot(

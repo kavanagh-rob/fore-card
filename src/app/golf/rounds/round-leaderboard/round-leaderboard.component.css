@@ -1,6 +1,3 @@
-/*section.page-wrap {*/
-  /*background-image: none;*/
-/*}*/
 /*@media only screen and (min-height: 43.5em) and (min-width: 64em) {*/
   /*section.page-wrap {*/
     /*background-image: url(/assets/images/leaderboard_background_image.jpg);*/
@@ -22,17 +19,23 @@
   /*}*/
 /*}*/
 
-section.fairway-backdrop {
-  background-image: url('/assets/images/leaderboard_background_image.jpg');
-  background-color:transparent;
-  background-attachment: fixed;
-  -webkit-background-size: cover;
-  background-size: cover;
-  padding-bottom: 0;
-  height: 800px
-}
+/*section.fairway-backdrop {*/
+  /*background-image: none;*/
+/*}*/
+/*@media only screen and (min-height: 1024px) and (min-width: 576px) {*/
+  section.fairway-backdrop {
+    background-image: url('/assets/images/leaderboard_background_image.jpg');
+    background-color: transparent;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+    padding-bottom: 0;
+    height: 800px
+  }
+/*}*/
 
-/*@media only screen and (min-height: 43.5em) and (min-width: 64em){*/
+
+
   #leaderboard-base-image {
     display: block !important;
     position: absolute;
@@ -41,35 +44,36 @@ section.fairway-backdrop {
     height: 80%;
     top: 0px;
   }
-/*}*/
 
-.leaderboard-parent-container {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-.leaderboard-fairway-img-container {
-  position: relative;
-  top: 0;
-  left: 0;
-}
-.leaderboard-base-img-container {
-  position: absolute;
-  top: 5%;
-  left: 10%;
-  height: 100%;
-  width: 100%;
 
-}
+  .leaderboard-parent-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .leaderboard-fairway-img-container {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .leaderboard-base-img-container {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    height: 100%;
+    width: 100%;
 
-.leaderboard-table-content {
-  z-index: 2;
-  position: relative;
-  width: 76%;
-  margin-top: 8%;
-  margin-left: 2%;
-}
+  }
+
+  .leaderboard-table-content {
+    z-index: 2;
+    position: relative;
+    width: 76%;
+    margin-top: 8%;
+    margin-left: 2%;
+  }
+
 
 .table-cell-text,
 .table-cell-index-number,

@@ -13,7 +13,7 @@
             <td class="table-cell-text">PAR</td>
             <td class="table-cell-index-number" *ngFor="let hole of round.course.holes;">{{ hole.par }}</td>
           </tr>
-          <tr *ngFor="let scorecard of scorecards;">
+          <tr *ngFor="let scorecard of scorecards | sortStablefordPipe">
             <td class="table-cell-text">{{getSelectedGolferName(scorecard.golfer_id)}}</td>
             <td class="table-cell-score-number" *ngFor="let score of scorecard.stablefordScores;">{{ score }}</td>
             <td class="table-cell-text">{{scorecard.totalStablefordScore}}</td>

@@ -114,7 +114,7 @@ export class ScoreCardComponent implements OnInit {
   submitScoreCard() {
     const updateData = {updateScorecards: this.scoreCards};
     this.golfDataService.updateScorecards( updateData ).then(res => { // Success
-      this.router.navigate(['round/' + this.round.round_id + '/round-leaderboard']);
+      this.router.navigate(['round/' + this.round.round_id + '/leaderboard']);
     });
   }
 }

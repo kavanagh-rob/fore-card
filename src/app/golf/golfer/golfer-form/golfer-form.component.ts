@@ -12,7 +12,7 @@ import { v1 as uuid } from 'uuid';
 export class GolferFormComponent implements OnInit {
 
   constructor( private golfDataService: GolfDataService,  private router: Router) {
-    this.model = new Golfer(new uuid(), '', '', null);
+    this.model = new Golfer(uuid(), '', '', null);
   }
   model;
 
