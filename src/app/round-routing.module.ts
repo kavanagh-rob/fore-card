@@ -1,5 +1,5 @@
 import {RoundComponent} from './golf/rounds/round.component';
-import {RoundLeaderboardComponent} from './golf/rounds/round-leaderboard/round-leaderboard.component';
+import {LeaderboardComponent} from './golf/leaderboard/leaderboard.component';
 import {RoundOverviewComponent} from './golf/rounds/round-overview/round-overview.component';
 import {GolferListComponent} from './golf/golfer/golfer-list/golfer-list.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,7 +18,7 @@ export const roundRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview', component: RoundOverviewComponent },
-      { path: 'leaderboard', component: RoundLeaderboardComponent},
+      { path: 'leaderboard', component: LeaderboardComponent},
       { path: 'golfers', component: GolferListComponent},
       {path: 'golfer/:golfer_id', component: GolferComponent},
       {path: 'groups', component: GroupComponent}

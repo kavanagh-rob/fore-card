@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GolfDataService } from '../../shared/services/golf-data.service';
-import {Golfer} from '../../models/golfer';
+import { GolfDataService } from '../shared/services/golf-data.service';
+import {Golfer} from '../models/golfer';
 
 
 @Component({
   selector: 'app-leaderboard',
-  templateUrl: './round-leaderboard.component.html',
-  styleUrls: ['./round-leaderboard.component.css']
+  templateUrl: './leaderboard.component.html',
+  styleUrls: ['./leaderboard.component.css']
 })
-export class RoundLeaderboardComponent implements OnInit {
+export class LeaderboardComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, private  golfDataService: GolfDataService) {
     console.log(this.route);

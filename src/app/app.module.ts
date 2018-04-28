@@ -6,7 +6,7 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GolfDataService } from './golf/shared/services/golf-data.service';
-import { RoundLeaderboardComponent } from './golf/rounds/round-leaderboard/round-leaderboard.component';
+import { LeaderboardComponent } from './golf/leaderboard/leaderboard.component';
 import { PageNotFoundComponent } from './golf/page-not-found/page-not-found.component';
 import { GolferFormComponent } from './golf/golfer/golfer-form/golfer-form.component';
 import {FormControl, FormsModule, NgControl} from '@angular/forms';
@@ -68,7 +68,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    RoundLeaderboardComponent,
+    LeaderboardComponent,
     PageNotFoundComponent,
     GolferFormComponent,
     CourseFormComponent,
