@@ -1,4 +1,4 @@
-<div class="leaderboard-parent-container">
+<div class="leaderboard-container-full">
   <section class="fairway-backdrop leaderboard-fairway-img-container">
     <div id="leaderboardBg" class="leaderboard-base-img-container">
       <img src="/assets/images/leaderboard-base-image.png" width="917" height="510" border="0" id="leaderboard-base-image">
@@ -7,19 +7,19 @@
           <thead class="leaderboard-table-header">
             <tr>
               <th class="table-cell-text">HOLE</th>
-              <th class="table-cell-index-number" *ngFor="let hole of round.course.holes; let i = index">{{ i+1 }}</th>
+              <th class="table-cell-text" *ngFor="let hole of round.course.holes; let i = index">{{ i+1 }}</th>
              
             </tr>
             <tr>
               <th class="table-cell-text">PAR</th>
-              <th class="table-cell-index-number" *ngFor="let hole of round.course.holes;">{{ hole.par }}</th>
+              <th class="table-cell-text" *ngFor="let hole of round.course.holes;">{{ hole.par }}</th>
               <th class="table-cell-text">TOTAL</th>
             </tr>
         </thead>
           <tbody class="leaderboard-table-body">
             <tr *ngFor="let scorecard of scorecards | sortStablefordPipe">
               <td class="table-cell-text">{{getSelectedGolferName(scorecard.golfer_id)}}</td>
-              <td class="table-cell-score-number" *ngFor="let score of scorecard.stablefordScores;"><div class="cell-score-border">{{ score }}</div></td>
+              <td class="table-cell-text-red" *ngFor="let score of scorecard.stablefordScores;"><div class="cell-score-border">{{ score }}</div></td>
               <td class="table-cell-text">{{scorecard.totalStablefordScore}}</td>
             </tr>
         </tbody>
@@ -27,4 +27,64 @@
       </div>
     </div>
   </section>
+</div>
+<div class="leaderboard-container-compact">
+  <section>
+      <table class="table hoverTable">
+        <thead class="leaderboard-table-header-compact">
+          <tr>
+            <th class="table-cell-text">POS</th>
+            <th class="table-cell-text">PLAYER</th>
+            <th class="table-cell-text">THRU</th>
+            <th class="table-cell-text">TOTAL</th>           
+          </tr>
+      </thead>
+        <tbody *ngFor="let scorecard of scorecards | sortStablefordPipe; let i = index" class="leaderboard-table-body-compact">
+          <tr (click)="toggleAccordian(i)">
+              <td class="table-cell-text">{{i +1}}</td>
+              <td class="table-cell-text">{{getSelectedGolferName(scorecard.golfer_id)}}</td>
+              <td class="table-cell-text">{{getLastUpdatedHole(scorecard)}}</td>
+              <td class="table-cell-text-red">{{getTotalStablefordScore(scorecard)}}</td>
+          </tr>
+          <tr [hidden]="!(accordianOpened === i)" class="leaderboard-accordian">
+              <td colspan="4"class="table-cell-text">
+                <table class="table">
+                  <thead class="leaderboard-compact-accordian-th">
+                    <tr class="accordian-table-header-1">
+                        <th>HOLE</th>
+                        <th *ngFor="let hole of round.course.holes | slice:0:9; let i = index">{{ i +1 }}</th>
+                    </tr>
+                    <tr class="accordian-table-header-2">
+                        <th>PAR</th>
+                        <th *ngFor="let hole of round.course.holes | slice:0:9; let i = index">{{ hole.par }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td></td>
+                        <td class="table-cell-text-red" *ngFor="let hole of round.course.holes | slice:8:17; let i = index">{{getStablefordScore(scorecard, i)}}</td>
+                    </tr>
+                  </tbody>
+                  <thead class="leaderboard-compact-accordian-th">
+                    <tr class="accordian-table-header-1">
+                        <th>HOLE</th>
+                        <th *ngFor="let hole of round.course.holes | slice:8:17; let i = index">{{ i + 10 }}</th>
+                    </tr>
+                    <tr class="accordian-table-header-2">
+                        <th>PAR</th>
+                        <th *ngFor="let hole of round.course.holes | slice:8:17; let i = index">{{ hole.par }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td></td>
+                        <td class="table-cell-text-red" *ngFor="let hole of round.course.holes | slice:8:17; let i = index">{{getStablefordScore(scorecard, i)}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+          </tr>
+      </tbody>
+      </table>
+    </section>
 </div>

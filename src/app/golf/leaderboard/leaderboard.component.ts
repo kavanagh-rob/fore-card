@@ -12,16 +12,30 @@ import {Golfer} from '../models/golfer';
 export class LeaderboardComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, private  golfDataService: GolfDataService) {
-    console.log(this.route);
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
   }
   round;
   scorecards = [];
+  accordianOpened = -1 ;
 
   ngOnInit() {
     this.golfDataService.getScorecardsForRound(this.round.round_id).then(res => { // Success
       this.scorecards = res.Items;
     });
+  }
+
+  toggleAccordian (index) {
+    this.accordianOpened = this.accordianOpened === index ? -1 : index;
+ }
+
+  getLastUpdatedHole(scorecard) {
+    return scorecard.baseScores.length === 0 ? 'n/a' : scorecard.baseScores.length;
+  }
+  getStablefordScore(scorecard, index) {
+    return scorecard.stablefordScores[index] ? scorecard.stablefordScores[index] : '';
+  }
+  getTotalStablefordScore(scorecard) {
+    return scorecard.totalStablefordScore ? scorecard.totalStablefordScore : 'n/a';
   }
 
   getSelectedGolferName(golferId) {
