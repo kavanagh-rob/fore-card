@@ -106,3 +106,33 @@ color: darkred;
   background: #009b77;
   color: white
 }
+
+.bogie {
+  border: 2px solid red;
+}
+.par {  
+  border: 1px solid black;  
+}
+.birdie {
+  border: 1px solid black;
+  background-color:yellow; 
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+}
+.eagle {  
+  border: 2px solid red;
+  background-color:#7b68ee;  
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+}
+
+.albatross {  
+  border: 2px solid black;
+  background-color:darkred;
+  color: white;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+}

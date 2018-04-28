@@ -19,7 +19,7 @@
           <tbody class="leaderboard-table-body">
             <tr *ngFor="let scorecard of scorecards | sortStablefordPipe">
               <td class="table-cell-text">{{getSelectedGolferName(scorecard.golfer_id)}}</td>
-              <td class="table-cell-text-red" *ngFor="let score of scorecard.stablefordScores;"><div class="cell-score-border">{{ score }}</div></td>
+              <td class="table-cell-text-red" *ngFor="let score of scorecard.stablefordScores;"><div >{{ score }}</div></td>
               <td class="table-cell-text">{{scorecard.totalStablefordScore}}</td>
             </tr>
         </tbody>
@@ -61,8 +61,12 @@
                   </thead>
                   <tbody>
                     <tr>
-                        <td></td>
-                        <td class="table-cell-text-red" *ngFor="let hole of round.course.holes | slice:8:17; let i = index">{{getStablefordScore(scorecard, i)}}</td>
+                        <td>SP</td>
+                        <td class="table-cell-text-red" *ngFor="let hole of round.course.holes | slice:0:9; let i = index"><div [className]="getScoreClass(scorecard, i)">{{getStrokeScore(scorecard, i)}}</div></td>
+                    </tr>
+                    <tr>
+                        <td>STF</td>
+                        <td class="table-cell-text-red" *ngFor="let hole of round.course.holes | slice:0:9; let i = index"><div>{{getStablefordScore(scorecard, i)}}</div></td>
                     </tr>
                   </tbody>
                   <thead class="leaderboard-compact-accordian-th">
@@ -77,8 +81,12 @@
                   </thead>
                   <tbody>
                     <tr>
-                        <td></td>
-                        <td class="table-cell-text-red" *ngFor="let hole of round.course.holes | slice:8:17; let i = index">{{getStablefordScore(scorecard, i)}}</td>
+                        <td>SP</td>
+                        <td class="table-cell-text-red" *ngFor="let hole of round.course.holes | slice:8:17; let i = index"><div [className]="getScoreClass(scorecard, i+9)">{{getStrokeScore(scorecard, i+9)}}</div></td>
+                    </tr>
+                    <tr>
+                        <td>STF</td>
+                        <td class="table-cell-text-red" *ngFor="let hole of round.course.holes | slice:8:17; let i = index"><div>{{getStablefordScore(scorecard, i+9)}}</div></td>
                     </tr>
                   </tbody>
                 </table>
