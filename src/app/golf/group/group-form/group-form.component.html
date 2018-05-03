@@ -1,55 +1,65 @@
 <h1>Manage Groups</h1>
-<div [hidden]="!round.groups">
-  <div *ngFor="let group of round.groups; let i = index;">
-    <h2>Group {{i+1}} : {{group.name}}</h2>
-    <table class="table hoverTable">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Player</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let golfer of round.golfers | golferGroupPipe:group.name; let i = index;" >
-        <td>{{i+1}}</td>
-        <td>{{golfer.name}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
+  <ol style ="border:1px dashed gray" >
+    <li>Add Groups using "Add New Group" Button</li>
+    <li>Select Golfers for Each Group</li>
+    <li>Save Groups using button at bottom</li>
+  </ol>
 <div>
   <form #addGroupForm="ngForm">
     <div class="form-group">
-      <div class="row ">
+      <div class="row" style ="border-bottom:3px solid black; padding-bottom: 15px">
         <label class="col-xs-4" for="groupName">Group Name</label>
         <div class="col-xs-4">
-          <input type="text" class="form-control" [(ngModel)]="groupInputValue" name="groupInputValue" #groupName/>
+          <input type="text" placeholder="Enter Group Name" class="form-control" [(ngModel)]="groupInputValue" name="ngModel" #groupName id="groupName" required/>
         </div>
         <div class="col-xs-1"></div>
-        <button class="btn btn-success  col-xs-3" (click)="addGroup(groupName.value) ">Create Group</button>
+        <button class="btn btn-success col-xs-3" (click)="addGroup(groupName.value) ">Add New Group</button>
       </div>
     </div>  
   </form>
   <br/>
 </div>
 
-<div *ngFor="let golfer of round.golfers; let i = index;">
+<div [hidden]="!round.groups">
+  <div *ngFor="let group of round.groups; let i = index;">
+    <section [style.background]="getErrorBackground(group.name)" style ="border:2px solid blue; padding: 10px; margin-bottom: 15px">
+      <div [hidden]="(getGroupLength(group.name) <= 4)"><h3>Four players Max per Group</h3></div>
+      <h2>Group {{i+1}} : {{group.name}}</h2>
+      <table class="table hoverTable">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Player</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let golfer of round.golfers | golferGroupPipe:group.name; let i = index;" >
+          <td>{{i+1}}</td>
+          <td>{{golfer.name}}</td>
+          <td><a class="link" (click)="removeGolferFromGroup(golfer)">remove</a></td>
+        </tr>
+        </tbody>
+      </table>
+  </section>
+  </div>
+</div>
+
+<div *ngFor="let golfer of round.golfers | golferGroupPipe:undefined; let i = index;">
   <form #addGolferToGroupForm="ngForm">
     <div class="form-group">
       <div class="row ">
-        <label class="col-xs-4" for="golfer-{i}}">{{golfer.name}} (handicap: {{golfer.handicap}})</label>
+        <label class="col-xs-4" for="golfer-{i}}">{{golfer.name}} [hcap: {{golfer.handicap}}]</label>
         <div class="col-xs-4">
-          <select  type="string" class="form-control" id="golfer-{i}}" name="golfer-{i}}" #groupSelected>
-            <option [ngValue]="undefined" disabled selected>Select Group</option>
+          <select [(ngModel)]="golfer.group_id" type="string" class="form-control" id="golfer-{i}}" name="golfer-{i}}" #groupSelected>
+            <option [ngValue]="undefined" selected>Select Group</option>
             <option *ngFor="let group of round.groups" [value]="group.name">{{group.name}}</option>
           </select>
         </div>
         <div class="col-xs-1"></div>
-        <button class="btn btn-success  col-xs-3" (click)="addGolferToGroup(golfer, groupSelected.value)">Add To Group</button>
       </div>
     </div>  
   </form>
   <br/>
 </div>
+<button class="btn btn-success  col-xs-3" (click)="submitGroups()">Save Groups</button>

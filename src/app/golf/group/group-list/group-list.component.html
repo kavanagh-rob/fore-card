@@ -1,22 +1,42 @@
 <h3>Groups</h3>
 <div [hidden]="!round.groups">
   <div *ngFor="let group of round.groups">
+    <h2>{{group.name}}</h2>
     <table class="table hoverTable">
       <thead>
       <tr>
-        <th scope="col">{{group.name }}</th>
-        <th scope="col">Group Name</th>
-        <th scope="col">Number of Players</th>
+        <th scope="col">#</th>
+        <th scope="col">Player</th>
+        <th scope="col">Group</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let group of round.groups; let i = index;" >
+      <tr *ngFor="let golfer of round.golfers | golferGroupPipe:group.name; let i = index;" >
         <td>{{i+1}}</td>
-        <td>{{group.name}}</td>
-        <td>{{group.handicap}}</td>
+        <td>{{golfer.name}}</td>
+        <td>{{getGolferGroup(golfer)}}</td>
       </tr>
       </tbody>
     </table>
   </div>
+</div>
+<div [hidden]="playerHasNoGroupAssigned()">
+    <h2 style="color: red">No Group Assigned</h2>
+    <table class="table hoverTable">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Player</th>
+        <th scope="col">Group</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let golfer of round.golfers | golferGroupPipe:undefined; let i = index;" >
+        <td>{{i+1}}</td>
+        <td>{{golfer.name}}</td>
+        <td>No Group Assigned</td>
+      </tr>
+      </tbody>
+    </table>
 </div>
 <a class="btn btn-primary" routerLink="../groupForm">Manage Groups</a>
