@@ -1,0 +1,22 @@
+<h3>Groups</h3>
+<div [hidden]="!round.groups">
+  <div *ngFor="let group of round.groups">
+    <table class="table hoverTable">
+      <thead>
+      <tr>
+        <th scope="col">{{group.name }}</th>
+        <th scope="col">Group Name</th>
+        <th scope="col">Number of Players</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let group of round.groups; let i = index;" >
+        <td>{{i+1}}</td>
+        <td>{{group.name}}</td>
+        <td>{{group.handicap}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<a class="btn btn-primary" routerLink="../groupForm">Manage Groups</a>
