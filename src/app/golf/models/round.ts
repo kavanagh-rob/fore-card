@@ -8,4 +8,5 @@ export class Round {
     public course: Course,
     public golfers: Array<Golfer>
   ) {  }
+  groups: Array<string>;
 }

@@ -21,3 +21,6 @@
 <div [hidden]="round">
   <a class="btn btn-primary" routerLink="/addGolfer">Add Golfer</a>
 </div>
+<div [hidden]="!round">
+  <a class="btn btn-primary" routerLink="/addGolfer">Edit Golfers</a>
+</div>

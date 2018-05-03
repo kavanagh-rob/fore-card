@@ -1,17 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
+import {FormControl, FormsModule, NgControl} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GolfDataService } from './golf/shared/services/golf-data.service';
 import { LeaderboardComponent } from './golf/leaderboard/leaderboard.component';
 import { PageNotFoundComponent } from './golf/page-not-found/page-not-found.component';
+import { GolferComponent } from './golf/golfer/golfer/golfer.component';
 import { GolferFormComponent } from './golf/golfer/golfer-form/golfer-form.component';
-import {FormControl, FormsModule, NgControl} from '@angular/forms';
 import { CourseFormComponent } from './golf/course/course-form/course-form.component';
 import { CourseListComponent } from './golf/course/course-list/course-list.component';
+import { RoundComponent } from './golf/rounds/round.component';
 import { RoundOverviewComponent } from './golf/rounds/round-overview/round-overview.component';
 import { RoundListComponent } from './golf/rounds/round-list/round-list.component';
 import { RoundFormComponent } from './golf/rounds/round-form/round-form.component';
@@ -20,12 +22,8 @@ import { EditGolferComponent } from './golf/golfer/edit-golfer/edit-golfer.compo
 import { ScoreCardComponent } from './golf/score-card/score-card.component';
 import {CourseResolver} from './golf/shared/resolvers/course-resolver';
 import {GolferResolver} from './golf/shared/resolvers/golfer-resolver';
-import { GolferComponent } from './golf/golfer/golfer/golfer.component';
-import { GroupComponent } from './golf/group/group.component';
 import {RoundRoutingModule} from './round-routing.module';
-import { RoundComponent } from './golf/rounds/round.component';
 import { SortStablefordPipe } from './golf/shared/pipes/sort-stableford.pipe';
-
 
 const appRoutes: Routes = [
   {
@@ -80,7 +78,6 @@ const appRoutes: Routes = [
     EditGolferComponent,
     ScoreCardComponent,
     GolferComponent,
-    GroupComponent,
     RoundComponent,
     SortStablefordPipe
   ],

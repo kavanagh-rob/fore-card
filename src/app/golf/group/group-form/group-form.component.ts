@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GolfDataService } from '../../shared/services/golf-data.service';
 import { Round } from '../../models/round';
+import {Golfer} from '../../models/golfer';
 
 @Component({
   selector: 'app-group-form',
@@ -12,29 +13,34 @@ export class GroupFormComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, private  golfDataService: GolfDataService) {
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
+    if ( !this.round.groups ) {
+      this.round.groups = [];
+    }
   }
   round: Round;
+  groupInputValue = '';
 
   ngOnInit() {
-    this.round.groups =  this.round.groups || [];
   }
 
   updateGroups() {
-    console.log(this.round.groups);
   }
 
   addGroup(groupName) {
-    console.log(groupName);
     const group: any = {};
-    group.name = groupName;
-    this.round.groups.push(group);
+    group.name = groupName.trim();
+    if ((this.round.groups.indexOf(group.name) === -1)) {
+      this.round.groups.push(group);
+    }
+    this.groupInputValue = '';
   }
   removeGroup(groupToDelete) {
     this.round.groups = this.round.groups.filter(
       group => group !== groupToDelete);
     }
 
-  addGolferToGroup() {
-    console.log(this.round);
+  addGolferToGroup(golfer, selectedGroup) {
+   golfer.group_id = selectedGroup;
   }
+
 }
