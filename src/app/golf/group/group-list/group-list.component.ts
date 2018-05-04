@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GolfDataService } from '../../shared/services/golf-data.service';
 import { Round } from '../../models/round';
 import {Golfer} from '../../models/golfer';
@@ -11,7 +11,7 @@ import {Golfer} from '../../models/golfer';
 })
 export class GroupListComponent implements OnInit {
 
-  constructor( private route: ActivatedRoute, private  golfDataService: GolfDataService) {
+  constructor( private route: ActivatedRoute, private router: Router, private  golfDataService: GolfDataService) {
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
   }
   round: Round;
@@ -30,6 +30,10 @@ export class GroupListComponent implements OnInit {
       return obj['group_id'] === undefined;
     }).length);
     return !(groupSize > 0);
+  }
+
+  selectGroup(groupId) {
+    this.router.navigate(['round/' + this.round.round_id + '/group/' + groupId]);
   }
 
 }

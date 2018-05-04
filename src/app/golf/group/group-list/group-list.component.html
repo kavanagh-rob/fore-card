@@ -1,7 +1,7 @@
 <h3>Groups</h3>
 <div [hidden]="!round.groups">
   <div *ngFor="let group of round.groups">
-    <h2>{{group.name}}</h2>
+    <a class="btn btn-primary" (click)="selectGroup(group.name)">{{group.name}} : (Scorecard)</a>
     <table class="table hoverTable">
       <thead>
       <tr>

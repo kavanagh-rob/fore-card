@@ -25,6 +25,7 @@ export const roundRoutes: Routes = [
       { path: 'leaderboard', component: LeaderboardComponent},
       { path: 'golfers', component: GolferListComponent},
       {path: 'golfer/:golfer_id', component: GolferComponent},
+      {path: 'group/:group_id', component: GolferComponent},
       {path: 'groupList', component: GroupListComponent},
       {path: 'groupForm', component: GroupFormComponent}
     ]

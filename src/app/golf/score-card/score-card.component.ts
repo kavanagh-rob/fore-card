@@ -15,8 +15,18 @@ export class ScoreCardComponent implements OnInit {
     this.route.params.subscribe( params =>
       this.golferId = params['golfer_id']
     );
+    this.route.params.subscribe( params =>
+      this.groupId = params['group_id']
+    );
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
-    this.golfers = this.getSelectedGolfers();
+    if ( this.golferId ) {
+      this.golfers = this.getSelectedGolfer();
+    } else if (this.groupId) {
+      const self = this;
+      this.golfers = this.round.golfers.filter(function(obj: Golfer) {
+        return obj['group_id'] === self.groupId;
+      });
+    }
     this.golfDataService.getScorecards( this.getScorecardIdsRequest() ).then(res => { // Success
       this.scoreCards = res.Responses.ScoreCards;
     });
@@ -24,7 +34,8 @@ export class ScoreCardComponent implements OnInit {
   scoreOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, ' /'];
   round ;
   golferId;
-  golferIdList = [];
+  groupId;
+  golferList = [];
   golfers;
   scoreCards = [{totalStablefordScore: 0, baseScores: [], stablefordScores: []}];
 
@@ -36,20 +47,18 @@ export class ScoreCardComponent implements OnInit {
     const scorecardIds = [];
     if ( this.golferId ) {
       scorecardIds.push({scorecard_id: this.round.round_id + '|' + this.golferId});
-    } else if ( this.golferIdList ) {
-      this.golferIdList.forEach(function (golferId) {
-        scorecardIds.push({scorecard_id: this.round.round_id + '|' + golferId});
+    } else if ( this.groupId ) {
+      this.golfers.forEach(function (golfer) {
+        scorecardIds.push({scorecard_id: self.round.round_id + '|' + golfer.golfer_id});
       });
     }
     return {getData : scorecardIds};
   }
-  getSelectedGolfers() {
+  getSelectedGolfer() {
     const self = this;
-    if (self.golferId) {
       return this.round.golfers.filter(function(obj: Golfer) {
         return obj['golfer_id'] === self.golferId;
       });
-    }
   }
   setStableFordScores(golferIndex) {
     const self = this;
