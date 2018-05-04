@@ -37,7 +37,10 @@ export class ScoreCardComponent implements OnInit {
   groupId;
   golferList = [];
   golfers;
-  scoreCards = [{totalStablefordScore: 0, baseScores: [], stablefordScores: []}];
+  scoreCards = [{totalStablefordScore: 0, baseScores: [], stablefordScores: []},
+  {totalStablefordScore: 0, baseScores: [], stablefordScores: []},
+  {totalStablefordScore: 0, baseScores: [], stablefordScores: []},
+  {totalStablefordScore: 0, baseScores: [], stablefordScores: []}];
 
   ngOnInit() {
   }
