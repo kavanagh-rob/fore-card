@@ -34,9 +34,9 @@ export class RoundFormComponent implements OnInit {
       this.router.navigate(['/rounds']);
     });
   }
+
   setupNewScoreCards() {
     const self = this;
-
     this.golferList.selectedGolfers.forEach(function (golfer) {
       const scoreCardId =  self.round_id + '|' + golfer.golfer_id;
       const scoreCard = new ScoreCard(scoreCardId, golfer.golfer_id, golfer.name, self.round_id, [], []);
@@ -44,7 +44,6 @@ export class RoundFormComponent implements OnInit {
       self.golfDataService.putScorecard(scorecardData).then(res => { // Success
       });
     });
-
   }
 
 }

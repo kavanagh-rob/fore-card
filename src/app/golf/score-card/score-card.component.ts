@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Golfer} from '../models/golfer';
 import { GolfDataService } from '../shared/services/golf-data.service';
 import {ScoreCard} from '../models/scoreCards';
+import { v1 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-score-card',
@@ -20,7 +21,7 @@ export class ScoreCardComponent implements OnInit {
     );
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
     if ( this.golferId ) {
-      this.golfers = this.getSelectedGolfer();
+      this.golfers = this.getGolferById(this.golferId);
     } else if (this.groupId) {
       const self = this;
       this.golfers = this.round.golfers.filter(function(obj: Golfer) {
@@ -29,6 +30,7 @@ export class ScoreCardComponent implements OnInit {
     }
     this.golfDataService.getScorecards( this.getScorecardIdsRequest() ).then(res => { // Success
       this.scoreCards = res.Responses.ScoreCards;
+      this.origionalScoreCards = JSON.parse(JSON.stringify(this.scoreCards));
     });
   }
   scoreOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, ' /'];
@@ -37,10 +39,12 @@ export class ScoreCardComponent implements OnInit {
   groupId;
   golferList = [];
   golfers;
+  flashScoreLimit = 0;
   scoreCards = [{totalStablefordScore: 0, baseScores: [], stablefordScores: []},
   {totalStablefordScore: 0, baseScores: [], stablefordScores: []},
   {totalStablefordScore: 0, baseScores: [], stablefordScores: []},
   {totalStablefordScore: 0, baseScores: [], stablefordScores: []}];
+  origionalScoreCards;
 
   ngOnInit() {
   }
@@ -57,10 +61,10 @@ export class ScoreCardComponent implements OnInit {
     }
     return {getData : scorecardIds};
   }
-  getSelectedGolfer() {
+  getGolferById(golferId) {
     const self = this;
       return this.round.golfers.filter(function(obj: Golfer) {
-        return obj['golfer_id'] === self.golferId;
+        return obj['golfer_id'] === golferId;
       });
   }
   setStableFordScores(golferIndex) {
@@ -124,9 +128,77 @@ export class ScoreCardComponent implements OnInit {
   }
 
   submitScoreCard() {
+    const self = this;
     const updateData = {updateScorecards: this.scoreCards};
-    this.golfDataService.updateScorecards( updateData ).then(res => { // Success
-      this.router.navigate(['round/' + this.round.round_id + '/leaderboard']);
+    self.golfDataService.updateScorecards( updateData ).then(res => { // Success
+      self.putFlashUpdates();
+      self.router.navigate(['round/' + this.round.round_id + '/leaderboard']);
     });
   }
+
+  putFlashUpdates() {
+    const self = this;
+    const flashUpdates = this.getFlashUpdates();
+      flashUpdates.forEach(function (update) {
+        const data: any = {};
+        data.table_name = 'FlashUpdates';
+        data.item = update;
+        self.golfDataService.putFlashUpdates( data );
+      });
+  }
+
+  getFlashUpdates() {
+    const self = this;
+    const flashUpdateList = [];
+    self.origionalScoreCards.forEach(function (origionalcard) {
+      const latestCard = self.getScorecardByGolferId(origionalcard.golfer_id);
+      self.round.course.holes.forEach(function(hole, index) {
+        if (latestCard.baseScores[index] !== null && origionalcard.baseScores[index] === null) {
+            const flashScore = self.getFlashScore( latestCard.baseScores[index], self.round.course.holes[index].par);
+            if (flashScore) {
+              const update = {
+                'update_id': origionalcard.golfer_id + '|' + self.round.round_id + '|' + index + 1,
+                'round_id': self.round.round_id,
+                'golfer': self.getGolferById(origionalcard.golfer_id),
+                'hole': index + 1,
+                'flashScore': flashScore,
+                'date': Date.now()
+              };
+              flashUpdateList.push(update);
+            }
+        }
+      });
+    });
+    return flashUpdateList;
+  }
+
+  getFlashScore(score, par) {
+    const holeScore = parseInt(score , 10) -  parseInt(par , 10);
+    let result = null;
+      if (holeScore <= this.flashScoreLimit) {
+        switch (holeScore) {
+          case 1:
+              result = 'bogey';
+              break;
+          case 0:
+              result = 'par';
+              break;
+          case -1:
+              result = 'birdie';
+              break;
+          case -2:
+              result = 'eagle';
+              break;
+          case -3:
+              result = 'albatross';
+              break;
+          default:
+              result = null;
+        }
+      }
+  return result;
+  }
+
+
+
 }

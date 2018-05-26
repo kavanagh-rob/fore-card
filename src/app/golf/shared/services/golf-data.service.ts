@@ -100,4 +100,18 @@ export class GolfDataService {
       .then(this.extractData)
       .catch(this.handleErrorPromise);
   }
+
+  getFlashUpdatesPerRound(roundId) {
+    return this.http.get(`${environment.apiUrl}/flashupdate/` + roundId)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  putFlashUpdates(data) {
+    return this.http.put(`${environment.apiUrl}/flashupdate`, data)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
 }

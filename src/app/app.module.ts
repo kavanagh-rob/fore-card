@@ -24,6 +24,7 @@ import {CourseResolver} from './golf/shared/resolvers/course-resolver';
 import {GolferResolver} from './golf/shared/resolvers/golfer-resolver';
 import {RoundRoutingModule} from './round-routing.module';
 import { SortStablefordPipe } from './golf/shared/pipes/sort-stableford.pipe';
+import { SortFlashUpdatesPipe } from './golf/shared/pipes/sort-flash-updates.pipe';
 
 const appRoutes: Routes = [
   {
@@ -79,7 +80,8 @@ const appRoutes: Routes = [
     ScoreCardComponent,
     GolferComponent,
     RoundComponent,
-    SortStablefordPipe
+    SortStablefordPipe,
+    SortFlashUpdatesPipe
   ],
   imports: [
     RouterModule.forRoot(

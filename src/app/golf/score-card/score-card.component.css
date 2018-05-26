@@ -1,0 +1,15 @@
+.hole-col {
+  background-color: rgb(237, 252, 101);
+}
+.par-col {
+  background-color: rgb(46, 190, 147);
+}
+  
+.index-col {
+  background-color: coral;
+}
+
+.player-2,
+.player-4 {
+   background-color: lemonchiffon;
+}

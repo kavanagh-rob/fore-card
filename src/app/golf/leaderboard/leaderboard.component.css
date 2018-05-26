@@ -136,3 +136,16 @@ color: darkred;
   -moz-border-radius:50%;
   -webkit-border-radius:50%;
 }
+
+.score-type-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.score-type-radio-button {
+  margin: 5px;
+}
+
+.score-type-selected-value {
+  margin: 15px 0;
+}

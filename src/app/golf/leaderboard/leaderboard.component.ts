@@ -17,8 +17,10 @@ export class LeaderboardComponent implements OnInit {
   round;
   scorecards = [];
   accordianOpened = -1 ;
+  selectedScoreType;
 
   ngOnInit() {
+    this.selectedScoreType = 'stableford';
     this.golfDataService.getScorecardsForRound(this.round.round_id).then(res => { // Success
       this.scorecards = res.Items;
     });
@@ -62,7 +64,7 @@ export class LeaderboardComponent implements OnInit {
     return scorecard.baseScores[index] ? scorecard.baseScores[index] : '';
   }
   getStablefordScore(scorecard, index) {
-    return scorecard.stablefordScores[index] ? scorecard.stablefordScores[index] : '';
+    return scorecard.stablefordScores[index] !== undefined ? scorecard.stablefordScores[index] : '';
   }
   getTotalStablefordScore(scorecard) {
     return scorecard.totalStablefordScore ? scorecard.totalStablefordScore : 'n/a';

@@ -1,10 +1,19 @@
-<div class="card text-center">
-  <div class="card-header">
-  </div>
-  <div class="card-body">
-    <h2 class="card-title">Round : {{round.round_id}}</h2>
-    <p class="card-text">{{round.golfers.length}} players registered for round</p>
+<h2 class="updateHeader">Live Updates</h2>
+<div class="blogBackground">
+  <br/>
+  <div *ngFor="let update of flashUpdates | sortFlashUpdatesPipe">
+    <mat-card [style.background]="getUpdateColor(update.flashScore)">
+      <mat-card-header>
+        <img mat-card-avatar src="/assets/images/flashupdates/{{update.flashScore}}.jpg">
+        <mat-card-title><h3>{{update.golfer[0].name}} has scored a {{update.flashScore}}</h3></mat-card-title>
+        <mat-card-subtitle><h4>Hole {{update.hole}} | Time {{getUpdateTime(update.date)}} </h4></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+    </mat-card>
+    <hr style="border-top: dotted 1px;" />
   </div>
 </div>
+
 
 

@@ -7,14 +7,17 @@
 <div>
   <form #addGroupForm="ngForm">
     <div class="form-group">
-      <div class="row" style ="border-bottom:3px solid black; padding-bottom: 15px">
-        <label class="col-xs-4" for="groupName">Group Name</label>
-        <div class="col-xs-4">
-          <input type="text" placeholder="Enter Group Name" class="form-control" [(ngModel)]="groupInputValue" name="ngModel" #groupName id="groupName" required/>
+      <div class="row">
+        <label class="col-xs-4 col-sm-4" for="groupName" style="margin-top:15px; text-align: right">Group Name</label>
+        <div class="col-xs-7 col-sm-4">
+          <input type="text" style="margin-top:10px;" placeholder="Enter Group Name" class="form-control" [(ngModel)]="groupInputValue" name="ngModel" #groupName id="groupName" required/>
         </div>
-        <div class="col-xs-1"></div>
-        <button class="btn btn-success col-xs-3" (click)="addGroup(groupName.value) ">Add New Group</button>
       </div>
+        <div class="row"  style ="border-bottom:3px solid black; padding-bottom: 15px">
+          <div class="col-xs-3"></div>
+          <button class="btn btn-success col-xs-6" (click)="addGroup(groupName.value)" style="margin-top:10px; margin-left:10px;">Add New Group</button>
+          <div class="col-xs-3"></div>
+        </div>
     </div>  
   </form>
   <br/>
@@ -49,8 +52,8 @@
   <form #addGolferToGroupForm="ngForm">
     <div class="form-group">
       <div class="row ">
-        <label class="col-xs-4" for="golfer-{i}}">{{golfer.name}} [hcap: {{golfer.handicap}}]</label>
-        <div class="col-xs-4">
+        <label class="col-xs-5" for="golfer-{i}}">{{golfer.name}} [hcap: {{golfer.handicap}}]</label>
+        <div class="col-xs-7">
           <select [(ngModel)]="golfer.group_id" type="string" class="form-control" id="golfer-{i}}" name="golfer-{i}}" #groupSelected>
             <option [ngValue]="undefined" selected>Select Group</option>
             <option *ngFor="let group of round.groups" [value]="group.name">{{group.name}}</option>
@@ -62,4 +65,8 @@
   </form>
   <br/>
 </div>
-<button class="btn btn-success  col-xs-3" (click)="submitGroups()">Save Groups</button>
+<div class="row">
+  <div class="col-xs-1"></div>
+  <button class="btn btn-primary col-xs-10" (click)="submitGroups()">Save Groups</button>
+  <div class="col-xs-1"></div>
+</div>
