@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GolfDataService } from '../shared/services/golf-data.service';
 import {Golfer} from '../models/golfer';
-
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-leaderboard',
@@ -11,7 +11,7 @@ import {Golfer} from '../models/golfer';
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor( private route: ActivatedRoute, private  golfDataService: GolfDataService) {
+  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private  golfDataService: GolfDataService) {
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
   }
   round;
@@ -108,5 +108,16 @@ export class LeaderboardComponent implements OnInit {
         return obj['golfer_id'] === golferId;
       })[0];
     }
+  getWhatsappUrl() {
+    return this.sanitize('whatsapp://send?text= ForeCard Leaderboard: - ' + window.location.href + '/');
+  }
 
+  sanitize(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  isMobileDevice() {
+  // device detection
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
 }

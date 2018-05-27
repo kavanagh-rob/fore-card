@@ -39,12 +39,20 @@ export class GroupListComponent implements OnInit {
   }
 
   getWhatsappGroupUrl(groupId) {
-    return this.sanitize('whatsapp://send?text=http://fore-card.s3-website-eu-west-1.amazonaws.com/round/' +
-    this.round.round_id + '/group/' + groupId);
+    return this.sanitize('whatsapp://send?text= ForeCard for : ' + groupId +
+    ' - ' + window.location.origin + '/round/' +
+    this.round.round_id + '/group/' + groupId + '/');
   }
 
   sanitize(url: string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
-}
+  }
+
+  isMobileDevice() {
+  // device detection
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+
 
 }

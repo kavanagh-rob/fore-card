@@ -5,7 +5,7 @@
       <span>
         <a class="btn btn-primary" (click)="selectGroup(group.name)">{{group.name}} Scorecard</a>
       </span>
-      <a [href]="sanitize('whatsapp://send?text=http://fore-card.s3-website-eu-west-1.amazonaws.com/round/')" data-action="share/whatsapp/share">
+      <a [hidden]="!isMobileDevice()" [href]="getWhatsappGroupUrl(group.name)" data-action="share/whatsapp/share">
         <img id="ctl00_XXX" src="/assets/images/whatsapp-icon.png" style="height:30px; width: 30px; border: 0; margin-left: 10px"/> 
         </a>
       <table class="table hoverTable">

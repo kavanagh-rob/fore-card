@@ -150,9 +150,12 @@ color: darkred;
   margin: 15px 0;
 }
 
-.scoreViewContainer,
-.scoreViewContainer .btn-group {
+.scoreViewContainer {
   width: 100%;
+}
+
+.scoreViewContainer .btn-group {
+  width: 85%;
 }
 
 .scoreViewContainer button {

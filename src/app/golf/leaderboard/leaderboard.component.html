@@ -4,6 +4,10 @@
       <div class="button-spacer"></div>
       <button type="button" (click)="selectedScoreView='stroke'" [ngClass]="{'active':selectedScoreView === 'stroke'}" class="btn btn-primary">Stroke</button>
     </div>
+    <span class="button-spacer"></span>
+    <a [hidden]="!isMobileDevice()" [href]="getWhatsappUrl()" data-action="share/whatsapp/share">
+      <img id="ctl00_XXX" src="/assets/images/whatsapp-icon.png" style="height:30px; width: 30px; border: 0; margin-left: 10px;"/> 
+      </a>
 </div>
 <div class="leaderboard-container-full">
   <section class="fairway-backdrop leaderboard-fairway-img-container">
