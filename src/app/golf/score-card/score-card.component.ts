@@ -34,7 +34,7 @@ export class ScoreCardComponent implements OnInit {
       this.origionalScoreCards = JSON.parse(JSON.stringify(this.scoreCards));
     });
   }
-  scoreOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, ' /'];
+  scoreOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ' /'];
   round ;
   golferId;
   groupId;
@@ -104,11 +104,8 @@ export class ScoreCardComponent implements OnInit {
   }
 
   getAdjustedPar(hole, golfer) {
-    console.log(golfer);
     const highIndexShots = Math.trunc(golfer.handicap / 18);
     const lowIndexShots = highIndexShots + 1;
-    // console.log(highIndexShots);
-    // console.log(lowIndexShots);
     let numberOfLowerIndexShots = golfer.handicap % 18;
     let adjustedPar = hole.par;
     if ( golfer.handicap > 0 ) {
@@ -174,6 +171,7 @@ export class ScoreCardComponent implements OnInit {
                 'update_id': origionalcard.golfer_id + '|' + self.round.round_id + '|' + index + 1,
                 'round_id': self.round.round_id,
                 'golfer': self.getGolferById(origionalcard.golfer_id),
+                'type' : 'flashscore',
                 'hole': index + 1,
                 'flashScore': flashScore,
                 'date': Date.now()

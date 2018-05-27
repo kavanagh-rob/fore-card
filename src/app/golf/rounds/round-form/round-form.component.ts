@@ -30,6 +30,7 @@ export class RoundFormComponent implements OnInit {
     data.item = round;
     data.table_name = 'Rounds';
     this.setupNewScoreCards();
+    this.setupDefaultGroup(round);
     this.postLineupFlashUpdate();
     this.golfDataService.putRound(data).then(res => { // Success
       this.router.navigate(['/rounds']);
@@ -45,6 +46,16 @@ export class RoundFormComponent implements OnInit {
       self.golfDataService.putScorecard(scorecardData).then(res => { // Success
       });
     });
+  }
+
+  setupDefaultGroup(round) {
+    if (this.golferList.selectedGolfers.length < 5) {
+      const defaultGroupName = 'All-Players';
+      round.groups = [{name: defaultGroupName }];
+      round.golfers.forEach(function(golfer) {
+        golfer.group_id = defaultGroupName;
+      });
+    }
   }
 
   postLineupFlashUpdate() {

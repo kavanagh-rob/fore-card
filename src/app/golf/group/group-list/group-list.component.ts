@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GolfDataService } from '../../shared/services/golf-data.service';
 import { Round } from '../../models/round';
 import {Golfer} from '../../models/golfer';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-group-list',
@@ -11,7 +12,8 @@ import {Golfer} from '../../models/golfer';
 })
 export class GroupListComponent implements OnInit {
 
-  constructor( private route: ActivatedRoute, private router: Router, private  golfDataService: GolfDataService) {
+  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private router: Router,
+    private  golfDataService: GolfDataService) {
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
   }
   round: Round;
@@ -35,5 +37,14 @@ export class GroupListComponent implements OnInit {
   selectGroup(groupId) {
     this.router.navigate(['round/' + this.round.round_id + '/group/' + groupId]);
   }
+
+  getWhatsappGroupUrl(groupId) {
+    return this.sanitize('whatsapp://send?text=http://fore-card.s3-website-eu-west-1.amazonaws.com/round/' +
+    this.round.round_id + '/group/' + groupId);
+  }
+
+  sanitize(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
 }

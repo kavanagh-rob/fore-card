@@ -21,7 +21,7 @@
       <td>{{ hole.par }}</td>
       <td>{{ hole.index }}</td>
       <td *ngFor="let golfer of golfers; let j = index;">
-        <select style="width: 40px" type="number" [(ngModel)]="getBaseScoreModel(golfer.golfer_id).baseScores[i]" (ngModelChange)="setStableFordScores(golfer.golfer_id)" name ="stablefordScore-{{i}}" id="index-{{i}}" >
+        <select [ngStyle]="{'border-color': getBaseScoreModel(golfer.golfer_id).baseScores[i] ? 'green' : '' }" style="width: 97%" type="number" [(ngModel)]="getBaseScoreModel(golfer.golfer_id).baseScores[i]" (ngModelChange)="setStableFordScores(golfer.golfer_id)" name ="stablefordScore-{{i}}" id="index-{{i}}" >
           <option style="font-weight: bold;" *ngFor="let index of scoreOptions" [value]="index">{{index}}</option>
         </select>
       </td>

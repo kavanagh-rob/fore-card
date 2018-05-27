@@ -10,7 +10,6 @@ import {GolfDataService} from '../../shared/services/golf-data.service';
 export class RoundUpdateComponent implements OnInit {
   constructor( private route: ActivatedRoute, private golfDataService: GolfDataService) {
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
-    console.log(this.round);
     this.golfDataService.getFlashUpdatesPerRound(this.round.round_id).then(res => { // Success
       this.flashUpdates = res.Items;
     });
@@ -91,7 +90,7 @@ export class RoundUpdateComponent implements OnInit {
 
     getUpdateTitle(update) {
       let result = '';
-      if (update.flashScore) {
+      if (update.type === 'flashscore') {
         result = update.flashScore.toUpperCase() + ' for ' + update.golfer.name;
       } else if (update.type === 'comment') {
         result = update.alias + ' commented';
@@ -103,7 +102,7 @@ export class RoundUpdateComponent implements OnInit {
 
     getUpdateText(update) {
       let result = '';
-      if (update.flashScore) {
+      if (update.type === 'flashscore') {
         result = 'Hole ' + update.hole;
       } else if (update.type === 'comment') {
         result = update.text;

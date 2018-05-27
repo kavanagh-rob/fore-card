@@ -1,8 +1,13 @@
-<h3>Groups</h3>
+<h3>Group ScoreCards</h3>
 <div class= "groupsBody">
   <div [hidden]="!round.groups">
     <div *ngFor="let group of round.groups">
-      <a class="btn btn-primary" (click)="selectGroup(group.name)">Group {{group.name}} Scorecard</a>
+      <span>
+        <a class="btn btn-primary" (click)="selectGroup(group.name)">{{group.name}} Scorecard</a>
+      </span>
+      <a [href]="sanitize('whatsapp://send?text=http://fore-card.s3-website-eu-west-1.amazonaws.com/round/')" data-action="share/whatsapp/share">
+        <img id="ctl00_XXX" src="/assets/images/whatsapp-icon.png" style="height:30px; width: 30px; border: 0; margin-left: 10px"/> 
+        </a>
       <table class="table hoverTable">
         <thead>
         <tr>
