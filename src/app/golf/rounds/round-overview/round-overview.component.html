@@ -1,17 +1,40 @@
-<h2 class="updateHeader">Live Updates</h2>
-<div class="blogBackground">
-  <br/>
-  <div *ngFor="let update of flashUpdates | sortFlashUpdatesPipe">
-    <mat-card [style.background]="getUpdateColor(update.flashScore)">
-      <mat-card-header>
-        <img mat-card-avatar src="/assets/images/flashupdates/{{update.flashScore}}.jpg">
-        <mat-card-title><h3>{{update.golfer[0].name}} has scored a {{update.flashScore}}</h3></mat-card-title>
-        <mat-card-subtitle><h4>Hole {{update.hole}} | Time {{getUpdateTime(update.date)}} </h4></mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-      </mat-card-content>
-    </mat-card>
-    <hr style="border-top: dotted 1px;" />
+<div class="row updateHeader">
+  <div class="col-xs-8">
+    <h2 class="updateHeader">Live Updates</h2>
+  </div>
+  <div class="col-xs-4">
+    <button (click)="commentBoxOpen = !commentBoxOpen" class="btn btn-danger commentButton">{{commentBoxOpen ? 'Cancel': 'Comment'}}</button>
+  </div>
+</div>
+<div [hidden]="!commentBoxOpen">
+    <form (ngSubmit)="submitComment()" class="commentFormBody" #commentForm="ngForm">
+        <div class="form-group">
+            <label for="commentAlias">Alias</label>
+            <input type="text" class="form-control" minlength="1" maxlength="25" [(ngModel)]="commentAlias" name="commentAlias" #name="ngModel" id="commentAlias" required>
+          </div>  
+        <div class="form-group">
+          <label for="commentText">Comment</label>
+          <input type="text" class="form-control" minlength="5" maxlength="100" [(ngModel)]="commentText" name="commentText" #name="ngModel" id="commentText" required>
+        </div>    
+        <button type="submit" [disabled]="!commentForm.valid" class="btn btn-info">Submit Post</button>
+      </form>
+</div>
+<div class="blogScrollPane">
+  <div class="blogBackground">
+    <br/>
+    <div *ngFor="let update of flashUpdates | sortFlashUpdatesPipe">
+      <mat-card [style.background]="getUpdateColor(update.flashScore)" class="blogCard">
+        <mat-card-header>
+          <img mat-card-avatar src="/assets/images/flashupdates/{{update.flashScore ? update.flashScore : update.type}}.jpg">
+          <mat-card-title><h3>{{getUpdateTitle(update)}}</h3></mat-card-title>
+          <mat-card-subtitle><h4>{{getUpdateText(update)}}</h4></mat-card-subtitle>
+          <mat-card-subtitle><h4>Time {{getUpdateTime(update.date)}} </h4></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+      </mat-card>
+      <hr style="border-top: dotted 1px;" />
+    </div>
   </div>
 </div>
 

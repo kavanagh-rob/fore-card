@@ -149,3 +149,14 @@ color: darkred;
 .score-type-selected-value {
   margin: 15px 0;
 }
+
+.scoreViewContainer,
+.scoreViewContainer .btn-group {
+  width: 100%;
+}
+
+.scoreViewContainer button {
+  width: 45%;
+  margin-left: 2.5%;
+}
+

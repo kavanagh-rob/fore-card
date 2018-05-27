@@ -17,10 +17,9 @@ export class LeaderboardComponent implements OnInit {
   round;
   scorecards = [];
   accordianOpened = -1 ;
-  selectedScoreType;
+  selectedScoreView = 'stableford';
 
   ngOnInit() {
-    this.selectedScoreType = 'stableford';
     this.golfDataService.getScorecardsForRound(this.round.round_id).then(res => { // Success
       this.scorecards = res.Items;
     });
@@ -66,8 +65,39 @@ export class LeaderboardComponent implements OnInit {
   getStablefordScore(scorecard, index) {
     return scorecard.stablefordScores[index] !== undefined ? scorecard.stablefordScores[index] : '';
   }
-  getTotalStablefordScore(scorecard) {
-    return scorecard.totalStablefordScore ? scorecard.totalStablefordScore : 'n/a';
+  getTotalScore(scorecard) {
+    let score;
+    if ( this.selectedScoreView === 'stableford') {
+      score = scorecard.totalStablefordScore ? scorecard.totalStablefordScore : 'n/a';
+    } else if (this.selectedScoreView === 'stroke') {
+      score = this.getTotalStrokes(scorecard);
+    }
+    return score;
+  }
+
+  getTotalStrokes(scorecard) {
+    const self = this;
+    let strokeScore = 0;
+    scorecard.baseScores.forEach(value => {
+      if (value) {
+        strokeScore = strokeScore +  parseInt(value, 10);
+      }
+    });
+    return strokeScore;
+  }
+
+  getStrokeScoreUnderPar(scorecard) {
+    const self = this;
+    let total = 0;
+    this.round.course.holes.forEach(function(hole, index) {
+      const shotsForHole  = scorecard.baseScores[index];
+      if (shotsForHole) {
+        const score = parseInt(shotsForHole, 10) - parseInt(hole.par, 10);
+        total = total += score;
+      }
+    });
+    return total;
+
   }
 
   getSelectedGolferName(golferId) {

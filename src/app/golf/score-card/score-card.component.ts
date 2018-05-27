@@ -67,21 +67,22 @@ export class ScoreCardComponent implements OnInit {
         return obj['golfer_id'] === golferId;
       });
   }
-  setStableFordScores(golferIndex) {
+  setStableFordScores(golferId) {
     const self = this;
-    const golfer = this.golfers[ golferIndex ];
-    const scorecard = self.getScorecardByGolferId(golfer.golfer_id);
+    const scorecard = self.getScorecardByGolferId(golferId);
     this.round.course.holes.forEach(function (hole, index) {
-      scorecard.stablefordScores[index] = self.getStableford(hole, index, golfer) ;
+      scorecard.stablefordScores[index] = self.getStableford(hole, index, golferId) ;
     });
-    scorecard.totalStablefordScore = this.getTotalPoints(golferIndex);
+    scorecard.totalStablefordScore = this.getTotalPoints(golferId);
+
   }
 
-  getStableford(hole, number, golfer) {
+  getStableford(hole, number, golferId) {
     let points;
+    const golfer = this.getGolferById(golferId);
     if ( golfer ) {
-      const adjustedPar = this.getAdjustedPar(hole, golfer);
-      const scorecard = this.getScorecardByGolferId(golfer.golfer_id);
+      const adjustedPar = parseInt(this.getAdjustedPar(hole, golfer), 10);
+      const scorecard = this.getScorecardByGolferId(golferId);
       if (scorecard.baseScores[number] && scorecard.baseScores[number] > 0 && scorecard.baseScores[number] < adjustedPar + 2) {
         points = adjustedPar + 2 - scorecard.baseScores[number];
       } else if (scorecard.baseScores[number]) {
@@ -89,6 +90,11 @@ export class ScoreCardComponent implements OnInit {
       }
       return points;
     }
+  }
+
+  getBaseScoreModel(golferId) {
+    const model = this.getScorecardByGolferId(golferId);
+    return model ? model : {baseScores: []};
   }
   getScorecardByGolferId(golferId) {
     return this.scoreCards.filter(function(obj: ScoreCard) {
@@ -113,9 +119,15 @@ export class ScoreCardComponent implements OnInit {
     return adjustedPar;
   }
 
-  getTotalPoints(golferIndex) {
+  getTotalStablefordByGolferId(golfer_id) {
+    const scorecard = this.getScorecardByGolferId(golfer_id);
+    if (scorecard) {
+      return scorecard.totalStablefordScore;
+    }
+  }
+
+  getTotalPoints(golferId) {
     let totalPoints = 0;
-    const golferId = this.golfers[golferIndex].golfer_id;
     const scorecard = this.getScorecardByGolferId(golferId);
     if (scorecard) {
       scorecard.stablefordScores.forEach(function (value) {
@@ -128,11 +140,10 @@ export class ScoreCardComponent implements OnInit {
   }
 
   submitScoreCard() {
-    const self = this;
     const updateData = {updateScorecards: this.scoreCards};
-    self.golfDataService.updateScorecards( updateData ).then(res => { // Success
-      self.putFlashUpdates();
-      self.router.navigate(['round/' + this.round.round_id + '/leaderboard']);
+    this.golfDataService.updateScorecards( updateData ).then(res => { // Success
+        this.putFlashUpdates();
+        this.router.navigate(['round/' + this.round.round_id + '/leaderboard']);
     });
   }
 
@@ -153,7 +164,7 @@ export class ScoreCardComponent implements OnInit {
     self.origionalScoreCards.forEach(function (origionalcard) {
       const latestCard = self.getScorecardByGolferId(origionalcard.golfer_id);
       self.round.course.holes.forEach(function(hole, index) {
-        if (latestCard.baseScores[index] !== null && origionalcard.baseScores[index] === null) {
+        if (latestCard.baseScores[index] && !origionalcard.baseScores[index]) {
             const flashScore = self.getFlashScore( latestCard.baseScores[index], self.round.course.holes[index].par);
             if (flashScore) {
               const update = {
@@ -198,7 +209,5 @@ export class ScoreCardComponent implements OnInit {
       }
   return result;
   }
-
-
 
 }

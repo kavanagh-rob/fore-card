@@ -13,3 +13,9 @@
 .player-4 {
    background-color: lemonchiffon;
 }
+
+.totalCol {
+  background: rgb(82, 14, 192);
+  color:rgb(255, 230, 8);
+  font-weight: bold;
+}

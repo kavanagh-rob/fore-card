@@ -23,7 +23,7 @@ export class RoundFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.round_id = this.model.name + ':' + new Date().toISOString().split('T')[0];
+    this.round_id = this.model.name.split(' ').join('-') + ':' + new Date().toISOString().split('T')[0];
     const round = new Round(this.round_id, this.courseList.selectedCourse, this.golferList.selectedGolfers);
 
     const data: any = {};

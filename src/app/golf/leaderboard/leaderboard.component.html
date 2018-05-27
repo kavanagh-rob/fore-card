@@ -1,3 +1,10 @@
+<div class="scoreViewContainer">
+    <div class="btn-group">
+      <button type="button" (click)="selectedScoreView='stableford'" [ngClass]="{'active':selectedScoreView === 'stableford'}" class="btn btn-primary">Stableford</button>
+      <div class="button-spacer"></div>
+      <button type="button" (click)="selectedScoreView='stroke'" [ngClass]="{'active':selectedScoreView === 'stroke'}" class="btn btn-primary">Stroke</button>
+    </div>
+</div>
 <div class="leaderboard-container-full">
   <section class="fairway-backdrop leaderboard-fairway-img-container">
     <div id="leaderboardBg" class="leaderboard-base-img-container">
@@ -13,6 +20,7 @@
             <tr>
               <th class="table-cell-text">PAR</th>
               <th class="table-cell-text" *ngFor="let hole of round.course.holes;">{{ hole.par }}</th>
+              <th [hidden]="selectedScoreView !== 'stroke'" class="table-cell-text">Score</th>
               <th class="table-cell-text">TOTAL</th>
             </tr>
         </thead>
@@ -20,7 +28,8 @@
             <tr *ngFor="let scorecard of scorecards | sortStablefordPipe">
               <td class="table-cell-text">{{getSelectedGolferName(scorecard.golfer_id)}}</td>
               <td class="table-cell-text-red" *ngFor="let score of scorecard.stablefordScores;"><div >{{ score }}</div></td>
-              <td class="table-cell-text">{{scorecard.totalStablefordScore}}</td>
+              <th [hidden]="selectedScoreView !== 'stroke'" class="table-cell-text">{{getStrokeScoreUnderPar(scorecard)}}</th>
+              <td class="table-cell-text">{{getTotalScore(scorecard)}}</td>
             </tr>
         </tbody>
         </table>
@@ -36,6 +45,7 @@
             <th class="table-cell-text">POS</th>
             <th class="table-cell-text">PLAYER</th>
             <th class="table-cell-text">THRU</th>
+            <th [hidden]="selectedScoreView !== 'stroke'" class="table-cell-text">Score</th>
             <th class="table-cell-text">TOTAL</th>           
           </tr>
       </thead>
@@ -44,7 +54,8 @@
               <td class="table-cell-text">{{i +1}}</td>
               <td class="table-cell-text">{{getSelectedGolferName(scorecard.golfer_id)}}</td>
               <td class="table-cell-text">{{getLastUpdatedHole(scorecard)}}</td>
-              <td class="table-cell-text-red">{{getTotalStablefordScore(scorecard)}}</td>
+              <th [hidden]="selectedScoreView !== 'stroke'" class="table-cell-text">{{getStrokeScoreUnderPar(scorecard)}}</th>
+              <td class="table-cell-text-red">{{getTotalScore(scorecard)}}</td>
           </tr>
           <tr [hidden]="!(accordianOpened === i)" class="leaderboard-accordian">
               <td colspan="4"class="table-cell-text">

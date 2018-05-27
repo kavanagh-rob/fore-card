@@ -2,14 +2,20 @@
   .mat-card-avatar {
     height: 100px;
     width: 100px;
+    margin-top: auto;
+    margin-bottom: auto;
   }
   .updateHeader {
     text-align: center;
-    font-style: oblique;
     margin: 0;
-    padding: 10px;
+    padding: 5px;
     color: red;
-    background: #eaff36;
+    background: #0026cf;
+    /* padding-left: 5px; */
+    FONT-FAMILY: fantasy;
+    font-style: oblique;
+    font-family: cursive;
+    font-weight: bold;
   }
   .blogBackground{
     border: 12px solid darkred;
@@ -17,4 +23,34 @@
     margin: 5px;
     border-radius: 25px;
     background: #6ab304
+  }
+
+  .blogBackground .mat-card-header {
+    padding-left: 5px;
+  }
+
+  .blogScrollPane {
+    height: 800px;
+    overflow-y: scroll;
+  }
+  .blogCard{
+    padding: 2px;
+  }
+
+  .commentButton {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .commentFormBody {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
   }

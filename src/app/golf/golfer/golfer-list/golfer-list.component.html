@@ -1,26 +1,28 @@
-<h3>Available Golfers</h3>
+<div class="playersListBody">
+  <h3>Available Golfers</h3>
 
-<table class="table hoverTable">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Handicap</th>
-    <th scope="col" [hidden]="round"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let golfer of golfers; let i = index;" (click)="selectGolfer(golfer)" [class.highlighted]="isSelectedGolfer(golfer)">
-    <td>{{i+1}}</td>
-    <td>{{golfer.name}}</td>
-    <td>{{golfer.handicap}}</td>
-    <td [hidden]="round"><a class="link" (click)="editGolfer(golfer)">Edit</a></td>
-  </tr>
-  </tbody>
-</table>
-<div [hidden]="round">
-  <a class="btn btn-primary" routerLink="/addGolfer">Add Golfer</a>
-</div>
-<div [hidden]="!round">
-  <a class="btn btn-primary" routerLink="/addGolfer">Edit Golfers</a>
+  <table class="table hoverTable">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Handicap</th>
+      <th scope="col" [hidden]="round"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let golfer of golfers; let i = index;" (click)="selectGolfer(golfer)" [class.highlighted]="isSelectedGolfer(golfer)">
+      <td>{{i+1}}</td>
+      <td>{{golfer.name}}</td>
+      <td>{{golfer.handicap}}</td>
+      <td [hidden]="round"><a class="link" (click)="editGolfer(golfer)">Edit</a></td>
+    </tr>
+    </tbody>
+  </table>
+  <div [hidden]="round">
+    <a class="btn btn-primary" routerLink="/addGolfer">Add Golfer</a>
+  </div>
+  <div [hidden]="!round">
+    <a class="btn btn-primary" routerLink="/addGolfer">Edit Golfers</a>
+  </div>
 </div>
