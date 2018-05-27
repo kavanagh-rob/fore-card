@@ -97,8 +97,19 @@ export class ScoreCardComponent implements OnInit {
     const model = this.getScorecardByGolferId(golferId);
     return model ? model : {baseScores: []};
   }
+  getOrigionalScoreModel(golferId) {
+    const model = this.getOrigionalScorecardByGolferId(golferId);
+    return model ? model : {baseScores: []};
+  }
+
   getScorecardByGolferId(golferId) {
     return this.scoreCards.filter(function(obj: ScoreCard) {
+      return obj['golfer_id'] === golferId;
+    })[0];
+  }
+
+  getOrigionalScorecardByGolferId(golferId) {
+    return this.origionalScoreCards.filter(function(obj: ScoreCard) {
       return obj['golfer_id'] === golferId;
     })[0];
   }

@@ -19,3 +19,13 @@
   color:rgb(255, 230, 8);
   font-weight: bold;
 }
+
+.cardPopulated {
+  background: chartreuse;
+  border-color: green;
+}
+
+.cardPopulated.newEntry {
+  background: yellow;
+  border-color: orangered;
+}
