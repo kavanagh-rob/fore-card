@@ -1,6 +1,6 @@
 import {RoundComponent} from './golf/rounds/round.component';
 import {LeaderboardComponent} from './golf/leaderboard/leaderboard.component';
-import {RoundOverviewComponent} from './golf/rounds/round-overview/round-overview.component';
+import {RoundUpdateComponent} from './golf/rounds/round-update/round-update.component';
 import {GolferListComponent} from './golf/golfer/golfer-list/golfer-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import {FormControl, FormsModule, NgControl} from '@angular/forms';
@@ -20,8 +20,8 @@ export const roundRoutes: Routes = [
       resolvedRound: CourseResolver
     },
     children: [
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      { path: 'overview', component: RoundOverviewComponent },
+      { path: '', redirectTo: 'update', pathMatch: 'full' },
+      { path: 'update', component: RoundUpdateComponent },
       { path: 'leaderboard', component: LeaderboardComponent},
       { path: 'golfers', component: GolferListComponent},
       {path: 'golfer/:golfer_id', component: GolferComponent},

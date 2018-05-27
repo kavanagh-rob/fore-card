@@ -21,7 +21,8 @@ export class ScoreCardComponent implements OnInit {
     );
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
     if ( this.golferId ) {
-      this.golfers = this.getGolferById(this.golferId);
+      this.golfers = [];
+      this.golfers.push(this.getGolferById(this.golferId));
     } else if (this.groupId) {
       const self = this;
       this.golfers = this.round.golfers.filter(function(obj: Golfer) {
@@ -65,7 +66,7 @@ export class ScoreCardComponent implements OnInit {
     const self = this;
       return this.round.golfers.filter(function(obj: Golfer) {
         return obj['golfer_id'] === golferId;
-      });
+      })[0];
   }
   setStableFordScores(golferId) {
     const self = this;
@@ -103,9 +104,11 @@ export class ScoreCardComponent implements OnInit {
   }
 
   getAdjustedPar(hole, golfer) {
+    console.log(golfer);
     const highIndexShots = Math.trunc(golfer.handicap / 18);
     const lowIndexShots = highIndexShots + 1;
-
+    // console.log(highIndexShots);
+    // console.log(lowIndexShots);
     let numberOfLowerIndexShots = golfer.handicap % 18;
     let adjustedPar = hole.par;
     if ( golfer.handicap > 0 ) {

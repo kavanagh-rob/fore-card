@@ -4,10 +4,10 @@ import {GolfDataService} from '../../shared/services/golf-data.service';
 
 @Component({
   selector: 'app-homepage',
-  templateUrl: './round-overview.component.html',
-  styleUrls: ['./round-overview.component.css']
+  templateUrl: './round-update.component.html',
+  styleUrls: ['./round-update.component.css']
 })
-export class RoundOverviewComponent implements OnInit {
+export class RoundUpdateComponent implements OnInit {
   constructor( private route: ActivatedRoute, private golfDataService: GolfDataService) {
     this.round = this.route.snapshot.parent.data['resolvedRound'].Item;
     console.log(this.round);
@@ -24,9 +24,16 @@ export class RoundOverviewComponent implements OnInit {
   ngOnInit() {
   }
 
-  getUpdateTime(milisecs) {
-    const date = new Date(milisecs);
-    return this.addZero(date.getHours()) + ':' + this.addZero(date.getMinutes());
+  getUpdateTime(update) {
+    const date = new Date(update.date);
+    let timeString = this.addZero(date.getHours()) + ':' + this.addZero(date.getMinutes());
+    if (update.type === 'lineup') {
+      const month = date.getUTCMonth() + 1;
+      const day = date.getUTCDate();
+      const year = date.getUTCFullYear();
+      timeString += ': ' + day + '/' + month + '/' + year;
+    }
+    return timeString;
   }
   addZero(i) {
     if (i < 10) {
@@ -85,9 +92,11 @@ export class RoundOverviewComponent implements OnInit {
     getUpdateTitle(update) {
       let result = '';
       if (update.flashScore) {
-        result = update.flashScore.toUpperCase() + ' for ' + update.golfer[0].name;
+        result = update.flashScore.toUpperCase() + ' for ' + update.golfer.name;
       } else if (update.type === 'comment') {
         result = update.alias + ' commented';
+      } else if (update.type === 'lineup') {
+        result = 'Round Started in ' + update.course;
       }
       return result;
     }
@@ -98,6 +107,8 @@ export class RoundOverviewComponent implements OnInit {
         result = 'Hole ' + update.hole;
       } else if (update.type === 'comment') {
         result = update.text;
+      } else if (update.type === 'lineup') {
+        result = 'Players: ' + JSON.stringify(update.playerList);
       }
       return result;
     }

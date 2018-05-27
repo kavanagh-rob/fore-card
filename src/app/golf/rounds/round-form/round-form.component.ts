@@ -30,6 +30,7 @@ export class RoundFormComponent implements OnInit {
     data.item = round;
     data.table_name = 'Rounds';
     this.setupNewScoreCards();
+    this.postLineupFlashUpdate();
     this.golfDataService.putRound(data).then(res => { // Success
       this.router.navigate(['/rounds']);
     });
@@ -44,6 +45,32 @@ export class RoundFormComponent implements OnInit {
       self.golfDataService.putScorecard(scorecardData).then(res => { // Success
       });
     });
+  }
+
+  postLineupFlashUpdate() {
+    const data: any = {};
+    data.table_name = 'FlashUpdates';
+    data.item = this.getLineupUpdate();
+    this.golfDataService.putFlashUpdates( data );
+  }
+
+  getLineupUpdate() {
+    return {
+      'update_id': 'lineup|' + this.round_id,
+      'round_id': this.round_id,
+      'type': 'lineup',
+      'course' : this.courseList.selectedCourse.course_id,
+      'playerList': this.getPlayerNames(),
+      'date': Date.now()
+    };
+  }
+
+  getPlayerNames() {
+    const playerNames = [];
+    this.golferList.selectedGolfers.forEach(function (golfer) {
+      playerNames.push(golfer.name);
+    });
+    return playerNames;
   }
 
 }

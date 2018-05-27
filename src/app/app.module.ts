@@ -14,7 +14,7 @@ import { GolferFormComponent } from './golf/golfer/golfer-form/golfer-form.compo
 import { CourseFormComponent } from './golf/course/course-form/course-form.component';
 import { CourseListComponent } from './golf/course/course-list/course-list.component';
 import { RoundComponent } from './golf/rounds/round.component';
-import { RoundOverviewComponent } from './golf/rounds/round-overview/round-overview.component';
+import { RoundUpdateComponent } from './golf/rounds/round-update/round-update.component';
 import { RoundListComponent } from './golf/rounds/round-list/round-list.component';
 import { RoundFormComponent } from './golf/rounds/round-form/round-form.component';
 import { GolferListComponent } from './golf/golfer/golfer-list/golfer-list.component';
@@ -71,7 +71,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     GolferFormComponent,
     CourseFormComponent,
-    RoundOverviewComponent,
+    RoundUpdateComponent,
     CourseListComponent,
     RoundListComponent,
     RoundFormComponent,
