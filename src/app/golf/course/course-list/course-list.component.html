@@ -5,15 +5,17 @@
   <tr>
     <th scope="col">#</th>
     <th scope="col">Name</th>
+    <th scope="col">City</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let course of courses; let i = index;" (click)="selectCourse($event, course)" [class.highlighted]="selectedCourse && course.course_id === selectedCourse.course_id">
     <td>{{i+1}}</td>
-    <td>{{course.course_id}}</td>
+    <td>{{course.name}}</td>
+    <td>{{course.metaData.city}}</td>
   </tr>
   </tbody>
 </table>
 
-<a class="btn btn-primary" routerLink="/addCourse">Add Course</a>
+<a class="btn btn-primary" routerLink="/searchCourse">Lookup New Course</a>
 

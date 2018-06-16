@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://2mg0qiu822.execute-api.eu-west-1.amazonaws.com/prod'
+  apiUrl: 'https://2mg0qiu822.execute-api.eu-west-1.amazonaws.com/prod',
+  scrapeUrl: 'https://www.swingbyswing.com/api/swingbyswing/-/v1/courses'
 };

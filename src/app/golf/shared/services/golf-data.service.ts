@@ -25,6 +25,13 @@ export class GolfDataService {
       .catch(this.handleErrorPromise);
   }
 
+  searchCourses(data) {
+    return this.http.post(`${environment.apiUrl}/scrapecourses`, data)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
   getAllGolfers() {
     return this.http.get(`${environment.apiUrl}/golfer`)
       .toPromise()

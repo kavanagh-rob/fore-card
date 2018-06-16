@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Search For Golf Course</h1>
+  <form (ngSubmit)="onSubmit()" #golferForm="ngForm">
+    <div class="form-group">
+      <label for="searchValueInput">Course Search</label>
+      <input type="text" class="form-control" [(ngModel)]="searchValue" name="searchValueInput"  id="searchValueInput" required>
+    </div>
+    <div class="form-group">
+      <label for="searchTypeSelect">Search By</label>
+      <select type="CourseSearchTypeEnum" class="form-control" [(ngModel)]="selectedSearchType" name="searchTypeSelect">
+        <option *ngFor="let searchType of searchTypeOptions" [ngValue]="searchType">{{searchType}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Search Courses</button>
+    <!--button  class="btn btn-warning" (click)="manuallyAddCourse()">Manually Add Course</button-->
+  </form>
+</div>
+<div [hidden]="!foundCourses">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">City</th>
+      <th scope="col">Country</th>
+      <th scope="col">Tee Type</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let course of foundCourses; let i = index;">
+      <td>{{course.name}}</td>
+      <td>{{course.city}}</td>
+      <td>{{course.country}}</td>
+      <td>Mens</td>
+      <td><button type="submit" (click)="selectCourse(course)" class="btn btn-primary">Add Course</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

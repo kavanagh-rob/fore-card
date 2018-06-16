@@ -1,5 +1,5 @@
 <div>
-  <table class="table">
+  <table class="table scorecardTable">
       <colgroup>
         <col class="hole-col" />
         <col class="par-col" />
@@ -21,7 +21,7 @@
       <td>{{ hole.par }}</td>
       <td>{{ hole.index }}</td>
       <td *ngFor="let golfer of golfers; let j = index;">
-        <select [ngClass]="{'cardPopulated': getBaseScoreModel(golfer.golfer_id).baseScores[i], newEntry: !getOrigionalScoreModel(golfer.golfer_id).baseScores[i]}" style="width: 97%" type="number" [(ngModel)]="getBaseScoreModel(golfer.golfer_id).baseScores[i]" (ngModelChange)="setStableFordScores(golfer.golfer_id)" name ="stablefordScore-{{i}}" id="index-{{i}}" >
+        <select [ngClass]="{'cardPopulated': getBaseScoreModel(golfer.golfer_id).baseScores[i]}" style="width: 97%" type="number" [(ngModel)]="getBaseScoreModel(golfer.golfer_id).baseScores[i]" (ngModelChange)="setStableFordScores(golfer.golfer_id)" name ="stablefordScore-{{i}}" id="index-{{i}}" >
           <option style="font-weight: bold;" *ngFor="let index of scoreOptions" [value]="index">{{index}}</option>
         </select>
       </td>

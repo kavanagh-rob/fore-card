@@ -25,7 +25,7 @@
   border-color: green;
 }
 
-.cardPopulated.newEntry {
-  background: yellow;
-  border-color: orangered;
+.scorecardTable .ng-dirty {
+  background: yellow !important;
+  border-color: orangered !important;
 }

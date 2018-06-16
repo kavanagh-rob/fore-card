@@ -25,6 +25,8 @@ import {GolferResolver} from './golf/shared/resolvers/golfer-resolver';
 import {RoundRoutingModule} from './round-routing.module';
 import { SortStablefordPipe } from './golf/shared/pipes/sort-stableford.pipe';
 import { SortFlashUpdatesPipe } from './golf/shared/pipes/sort-flash-updates.pipe';
+import { FindNewCourseComponent } from './golf/course/find-new-course/find-new-course.component';
+import { WebScraperService } from './golf/shared/services/web-scraper.service';
 
 const appRoutes: Routes = [
   {
@@ -52,7 +54,11 @@ const appRoutes: Routes = [
     component: CourseListComponent
   },
   {
-    path: 'addCourse',
+    path: 'searchCourse',
+    component: FindNewCourseComponent
+  },
+  {
+    path: 'manualAddCourse',
     component: CourseFormComponent
   },
   { path: '',
@@ -81,7 +87,8 @@ const appRoutes: Routes = [
     GolferComponent,
     RoundComponent,
     SortStablefordPipe,
-    SortFlashUpdatesPipe
+    SortFlashUpdatesPipe,
+    FindNewCourseComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -97,7 +104,7 @@ const appRoutes: Routes = [
     FormsModule
   ],
 
-  providers: [GolfDataService, CourseResolver, GolferResolver],
+  providers: [GolfDataService, CourseResolver, GolferResolver, WebScraperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
